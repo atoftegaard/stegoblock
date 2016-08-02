@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<overlay id="stegoblockMessengercompose" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<script type="application/javascript" src="chrome://stegoblock/content/stegoblockMessengercompose.js"/>
+	<script type="application/javascript" src="chrome://stegoblock/content/aes.js"/>
+	
+	<vbox id="addresses-box">
+		<hbox id="stegoblock-message-box">
+			<hbox style="width: 11.5em;" pack="end">
+				<label id="stegoblock-message-label" value="Stego Block:" control="stegoblock-content"/>
+			</hbox>
+			
+			<textbox multiline="true" id="stegoblock-textbox" flex="1" placeholder="Embed a secondary message"
+				name="stegoblock.message.body" minheight="50"/>
+		</hbox>
+	</vbox>
+
+</overlay>

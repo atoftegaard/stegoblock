@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<overlay id="stegoblockMessenger" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<script type="application/javascript" src="chrome://stegoblock/content/stegoblockMessenger.js"/>
+	<script type="application/javascript" src="chrome://stegoblock/content/aes.js"/>
+	
+	<vbox id="expandedHeadersBox">
+		<hbox id="stegoblock-content-box">
+
+			<grid flex="1" id="stegoblock-grid">
+				<columns id="stegoblock-columns">
+					<column id="stegoblock-header-column" minwidth="0"></column>
+					<column id="stegoblock-content-column" flex="1"></column>
+				</columns>
+
+				<rows id="stegoblock-rows">
+					<row>
+						<label id="stegoblock-header" value="Stego Block" class="headerName"/>
+						<label id="stegoblock-content" flex="1"/>
+					</row>
+				</rows>
+			</grid>
+
+		</hbox>
+	</vbox>
+
+</overlay>

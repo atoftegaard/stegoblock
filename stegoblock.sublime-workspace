@@ -1,0 +1,1326 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"user",
+				"userGroups"
+			],
+			[
+				"collec",
+				"collectionName"
+			],
+			[
+				"colle",
+				"collectionName"
+			],
+			[
+				"Create",
+				"CreatableCollectionTypes"
+			],
+			[
+				"coll",
+				"collectionName"
+			],
+			[
+				"line",
+				"lineNumber"
+			],
+			[
+				"error",
+				"errorMsg"
+			],
+			[
+				"image",
+				"imageUrl"
+			],
+			[
+				"glossa",
+				"glossaryentryId"
+			],
+			[
+				"obesrve",
+				"observer"
+			],
+			[
+				"pop",
+				"popoverContent"
+			],
+			[
+				"obser",
+				"observerRef"
+			],
+			[
+				"glo",
+				"glossaryentries"
+			],
+			[
+				"Glo",
+				"glossaryentry"
+			],
+			[
+				"Useca",
+				"Usecases"
+			],
+			[
+				"red",
+				"redoResponsibilities"
+			],
+			[
+				"stake",
+				"stakeholders"
+			],
+			[
+				"cla",
+				"classifications"
+			],
+			[
+				"permi",
+				"permissions"
+			],
+			[
+				"st",
+				"storyboardpictures"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"subsc",
+				"subscribe"
+			],
+			[
+				"subs",
+				"subscribeNames"
+			],
+			[
+				"project",
+				"projectId"
+			],
+			[
+				"mem",
+				"memberIds"
+			],
+			[
+				"mainta",
+				"maintainTeams"
+			],
+			[
+				"sta",
+				"stateParams"
+			],
+			[
+				"selected",
+				"selectedCourse"
+			],
+			[
+				"in",
+				"invites"
+			],
+			[
+				"pro",
+				"project"
+			],
+			[
+				"projec",
+				"projectId"
+			],
+			[
+				"is",
+				"isInviteeToMember"
+			],
+			[
+				"invi",
+				"invitations"
+			],
+			[
+				"usernam",
+				"username"
+			],
+			[
+				"sub",
+				"subtypeOf"
+			],
+			[
+				"redo",
+				"redoSummary"
+			],
+			[
+				"urgen",
+				"urgency"
+			],
+			[
+				"update",
+				"updatedCount"
+			],
+			[
+				"counterpart",
+				"counterpartDocs"
+			],
+			[
+				"field",
+				"fieldNames"
+			],
+			[
+				"pre",
+				"preferredTeamRole"
+			],
+			[
+				"re",
+				"redoStopEvent"
+			],
+			[
+				"pla",
+				"placeholder"
+			],
+			[
+				"place",
+				"placeholderText"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"team",
+				"teamId"
+			],
+			[
+				"allte",
+				"allTeamMemberIds"
+			],
+			[
+				"ma",
+				"maxUsers"
+			],
+			[
+				"level",
+				"levelrow"
+			],
+			[
+				"excl",
+				"exclusionId"
+			],
+			[
+				"for",
+				"forEach"
+			],
+			[
+				"form",
+				"formCtrl"
+			],
+			[
+				"ngmo",
+				"ngModelCtrl"
+			],
+			[
+				"du",
+				"duplicateLabel"
+			],
+			[
+				"prio",
+				"priority"
+			],
+			[
+				"reactive",
+				"reactiveContext"
+			],
+			[
+				"reac",
+				"reactiveContext"
+			],
+			[
+				"bench",
+				"benchmarkMs"
+			],
+			[
+				"doc",
+				"docchildren"
+			],
+			[
+				"applyto",
+				"applyToEditorDoc"
+			],
+			[
+				"editor",
+				"editordoc"
+			],
+			[
+				"backgro",
+				"background-color"
+			],
+			[
+				"backgr",
+				"background-color"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"li",
+				"List"
+			],
+			[
+				"Do",
+				"DoEndoRequest()	void"
+			],
+			[
+				"file",
+				"fileContent"
+			],
+			[
+				"parse",
+				"parseContent"
+			],
+			[
+				"mini",
+				"minifyHtmlOptions"
+			],
+			[
+				"renderpos",
+				"renderPost"
+			],
+			[
+				"header",
+				"headeronly"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"render",
+				"renderOptions"
+			],
+			[
+				"to",
+				"toJSON"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"src",
+				"srcbackend"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"valida",
+				"validation-message"
+			],
+			[
+				"has-",
+				"has-success"
+			],
+			[
+				"add",
+				"addClass"
+			],
+			[
+				"cur",
+				"currentErr"
+			],
+			[
+				"current",
+				"currentTarget"
+			],
+			[
+				"model",
+				"modelProperty"
+			],
+			[
+				"control",
+				"controlMap"
+			],
+			[
+				"Backbone",
+				"backbone-validation"
+			],
+			[
+				"time",
+				"timestamp"
+			],
+			[
+				"handle",
+				"handlebars"
+			],
+			[
+				"mo",
+				"moduleName"
+			],
+			[
+				"ha",
+				"handlebars"
+			],
+			[
+				"com",
+				"ComponentModel"
+			],
+			[
+				"post",
+				"PostModel"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"name",
+				"NameModelFactory"
+			],
+			[
+				"Name",
+				"NameModelFactory"
+			],
+			[
+				"Na",
+				"NamesViewFactory"
+			],
+			[
+				"names",
+				"NamesCollectionFactory"
+			],
+			[
+				"Mong",
+				"Mongoose"
+			],
+			[
+				"home",
+				"homeTemplate"
+			],
+			[
+				"Header",
+				"HeaderModelFactory"
+			],
+			[
+				"routes",
+				"routesHit"
+			],
+			[
+				"sa",
+				"sandbox"
+			],
+			[
+				"res",
+				"resolvePage"
+			],
+			[
+				"Page",
+				"PageView"
+			],
+			[
+				"PageView",
+				"PageViewFactory"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 49.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"build",
+				"Build: Build"
+			],
+			[
+				"omni",
+				"OmniSharpSublime: Fix Usings"
+			],
+			[
+				"omn",
+				"OmniSharpSublime: ReBuild"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"install p",
+				"Package Control: Install Package"
+			],
+			[
+				"install pa",
+				"Package Control: Install Package"
+			],
+			[
+				"upgrade p",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"upgrade package",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"update",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"ugrade package",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"upgrade",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"prett",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			],
+			[
+				"pretty",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			]
+		],
+		"width": 435.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/chrome"
+	],
+	"file_history":
+	[
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/install.rdf",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/chrome.manifest",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/chrome/content/markup.xul",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/chrome/content/overlay.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/install.rdf",
+		"/install.rdf",
+		"/Users/andreastoftegaard/Downloads/ofmc-2016/test.AnB",
+		"/Users/andreastoftegaard/Downloads/ofmc-2016/examples/classic/SSO.AnB",
+		"/Users/andreastoftegaard/Downloads/ofmc-2016/sso.AnB",
+		"/Users/andreastoftegaard/Downloads/ofmc-2016/n.AnB",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/mup.json",
+		"/Users/andreastoftegaard/Downloads/cluster.sh",
+		"/Users/andreastoftegaard/Downloads/main_fw (2).sh",
+		"/Users/andreastoftegaard/Downloads/main_fw (1).sh",
+		"/Users/andreastoftegaard/Downloads/internal_fw (1).sh",
+		"/Users/andreastoftegaard/Downloads/cluster_frontend (1).sh",
+		"/Users/andreastoftegaard/Downloads/boundary (1).sh",
+		"/Users/andreastoftegaard/Downloads/main_fw.sh",
+		"/Users/andreastoftegaard/Downloads/internal_fw.sh",
+		"/Users/andreastoftegaard/Downloads/boundary.sh",
+		"/Users/andreastoftegaard/Downloads/cluster_frontend.sh",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/OmniSharpServer/packages/Nancy.0.22.2/lib/net40/Nancy.XML",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/taGlossaryPopoverFix.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/server/methods/inviteMethods.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/modal/views/invite-project-modal.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/css/projectList.css",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/actors/actorDetails.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/lib/app.browserify.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/lib/sb-admin-2.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/visions/visionDetails.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/viewport/viewport.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/usecases/usecaseDetails.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/usecases/usecasesList.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/testcases/testcaseDetails.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/testcases/testcasesList.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/stakeholders/stakeholderDetails.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/stakeholders/stakeholdersList.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/requirements/requirementDetails.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/requirements/requirementsList.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/projects/projectDetails.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/projects/projectList.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/profile/profile.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/personas/personaDetails.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/personas/personasList.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/home/home.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/goals/goalDetails.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/goals/goalsList.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/glossaryentries/glossaryentriesList.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/glossaryentries/glossaryentryDetails.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/extdocs/extdocDetails.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/extdocs/extdocsList.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/assumptions/assumptionDetails.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/assumptions/assumptionsList.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/actors/actorsList.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/server/publish.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/userPicker/userPicker.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/lib/subscribeHelpers.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/lib/app.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/loginButtons/loginButtons.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/visions/views/vision-details.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/loginButtons/template.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/css/viewport.css",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/summary/summary.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/lib/config.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/summary/template.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/viewport/views/viewport.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/associations/associations.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/server/methods/casMethods.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/redo.sublime-project",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor/local/build/programs/web.browser/packages/check.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor/local/build/programs/server/packages/check.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor/local/build/programs/server/npm/meteorhacks_kadira/node_modules/kadira-core/node_modules/babel-runtime/node_modules/core-js/build/index.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor/local/build/programs/server/npm/meteorhacks_kadira/node_modules/kadira-core/node_modules/babel-runtime/node_modules/core-js/build/build.ls",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor/local/build/programs/server/npm/meteorhacks_kadira/node_modules/kadira-core/dist/index.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/bulkEdit/template.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor/local/build/programs/server/npm/meteorhacks_kadira/node_modules/kadira-core/node_modules/babel-runtime/node_modules/core-js/library/fn/number/index.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor/local/build/programs/server/npm/meteorhacks_kadira/node_modules/kadira-core/node_modules/babel-runtime/node_modules/core-js/client/core.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/extdocs/views/extdocs-list.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/.env",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/projects/views/project-list.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/lib/common.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/managementAndTracing/template.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/managementAndTracing/managementAndTracing.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/personas/views/personas-list.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/bulkEdit/bulkEdit.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/settings.json",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/server/methods/projectMethods.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/server/startup/load.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/org/counts.csv",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/server/allows.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/lib/queries.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/pictureAndPicker/pictureAndPicker.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/server/triggers.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/model/model.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/pictureAndPicker/template.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor/versions",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/lib/helpers.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/packages.json",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/org/linecounts_with_cloc.md",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/server/methods/loggingMethods.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/lib/routes.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/extdocs/views/extdoc-details.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor/local/build/programs/web.browser/packages/lai_collection-extensions.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/node_modules/angular-ui-bootstrap/ui-bootstrap-tpls.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/node_modules/angular-bootstrap-datetimepicker/src/js/datetimepicker.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/diagrams/views/diagram-details.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/diagrams/diagramDetails.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/diagrams/diagramsList.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/diagrams/views/diagrams-list.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/mup/mup.json",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/enter.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/projects/views/project-details.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/README.md",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/css/fileupload.css",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/css/textAngular.css",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/modal/views/image-modal.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/exifOrientation.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/testcases/views/testcase-details.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/css/base.css",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/usecases/views/usecase-details.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/requirements/views/requirement-details.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/diagrams/diagram.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/testcases/views/testcases-list.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/css/sb-admin-2.css",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/inputList/template.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/modal/views/glossary-modal.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/profile/views/profile.html",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/associations/template.html"
+	],
+	"find":
+	{
+		"height": 22.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo,-/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo/,-*.meteor",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo/,-/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor/",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor/local/build/programs/server/npm/meteorhacks_kadira",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor/local",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo,-.meteor/*",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo,-.meteor/*",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo/server",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor/local",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/marktex-frontend,/Users/andreastoftegaard/Ikke Synkroniseret/marktex-livecollab",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/marktex-frontend",
+			"<current file>",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/marktex-frontend/components/katex/fonts,<current file>",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/marktex-frontend/components/katex/fonts",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/marktex-frontend",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/marktex-livecollab/node_modules/share",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/marktex-livecollab/node_modules/share/lib/client",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/marktex-frontend",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/marktex-frontend",
+			"",
+			"<open files>",
+			"<open files>,/Users/andreastoftegaard/Ikke Synkroniseret/Angular Sandbox/src/",
+			"<open files>,/Users/andreastoftegaard/Ikke Synkroniseret/Angular Sandbox/src/styles",
+			"<open files>",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/Frontend App/",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/Frontend App/src/",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/Frontend App/src/bower_components/require-handlebars-plugin",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/Frontend App/",
+			"/Users/andreastoftegaard/Ikke Synkroniseret/Frontend App/srv",
+			"<open files>"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"C,idp,SP,ID,URI",
+			"|C,idp,SP,ID,URI|",
+			"ID,",
+			"SK1",
+			"C,idp,SP,ID,URI",
+			" ",
+			"INT_DNS_IP",
+			"USR_IPR",
+			"EXT_SMTP_IP",
+			"glossaryentry",
+			"indexOf(\"/glossaryentry/\")",
+			"	\n	$reactive(this).attach($scope);",
+			"@",
+			"img",
+			"           ",
+			"          ",
+			"         ",
+			"        ",
+			"       ",
+			"      ",
+			"     ",
+			"    ",
+			"row",
+			"base64",
+			"base",
+			"item",
+			"partici",
+			"json",
+			"match.js",
+			"match",
+			"check",
+			"match",
+			"check/match",
+			"number",
+			"check =",
+			"Number",
+			"kadira",
+			"getAllDocuments =",
+			"loadProject",
+			"dbname",
+			"app:password@mongodb.com",
+			".logo",
+			"ctrl.collapse(); c",
+			"getAllDocuments =",
+			"Actors",
+			"self.actor",
+			"subscribeQuery",
+			"dtu.dk",
+			"current",
+			"archive",
+			"buffer",
+			"export",
+			"dropdo",
+			"dropdown",
+			"myString",
+			"myRegexp",
+			"getOptions",
+			"goal",
+			"state",
+			"states",
+			"dateti",
+			"dropdown-menu",
+			".dropdown {",
+			".dropdown",
+			"team",
+			"queries",
+			"teams",
+			"inviteUsers",
+			"teamsInvitedTo",
+			"teamInvitees",
+			"team",
+			"teams",
+			"getTeamUsers",
+			"loadpr",
+			"users",
+			"dataB64",
+			"currentProjectId",
+			"current",
+			"project",
+			"trigger",
+			"No currentProject found",
+			"removeMetaProperties",
+			"hash",
+			"hmac",
+			"id",
+			"stripMetaProperties",
+			"stripInvalidProperties",
+			"deNormalizeCollectionName",
+			"permissions",
+			"user",
+			"createListItem",
+			"reader",
+			"entries",
+			"export",
+			"angular",
+			"user helper",
+			"overriding",
+			"overriding 'user helper'",
+			"Papertrail",
+			"loginCAS",
+			"wins",
+			"                           ",
+			"                          ",
+			"                         ",
+			"                        ",
+			"                       ",
+			"                      ",
+			"LISTENING",
+			"arguments",
+			"formatArgs(arguments)",
+			"Winston",
+			"apply(Winston, ",
+			"logger",
+			"logger.",
+			"Winston",
+			"currentproj",
+			"exports",
+			"glossaryentries",
+			"extdocs",
+			"ext",
+			"diagrams",
+			"diagram",
+			"Diagram",
+			"Diagrams",
+			"diagrams",
+			"Diagrams",
+			"diagrams",
+			"diagram"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"type: 'textAngular'",
+			"acceptInvitationFromToken",
+			".requirement.",
+			"+",
+			"",
+			"+",
+			"",
+			"+",
+			"",
+			"+",
+			"",
+			"+",
+			"",
+			"url(components/katex/fonts/",
+			"typesettingservice",
+			"s",
+			"S",
+			"ects",
+			"",
+			"-10px -10px",
+			"($d1 + px)",
+			"($d2 + px)",
+			"($d2)px",
+			"$d2px"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 21.0
+	},
+	"input":
+	{
+		"height": 29.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 133.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.variable_get":
+	{
+		"height": 222.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"tapopo",
+				"client/directives/taGlossaryPopoverFix.js"
+			],
+			[
+				"inviteme",
+				"server/methods/inviteMethods.js"
+			],
+			[
+				"subscri",
+				"lib/subscribeHelpers.js"
+			],
+			[
+				"userpi",
+				"client/directives/userPicker/userPicker.js"
+			],
+			[
+				"sub",
+				"lib/subscribeHelpers.js"
+			],
+			[
+				"publish",
+				"server/publish.js"
+			],
+			[
+				"config",
+				"client/lib/config.js"
+			],
+			[
+				"bro",
+				"client/lib/app.browserify.js"
+			],
+			[
+				"vision",
+				"client/components/visions/visionDetails.js"
+			],
+			[
+				"loginbutt",
+				"client/directives/loginButtons/loginButtons.js"
+			],
+			[
+				"viewpo",
+				"client/css/viewport.css"
+			],
+			[
+				"summary",
+				"client/directives/summary/template.html"
+			],
+			[
+				"viewport",
+				"client/components/viewport/views/viewport.html"
+			],
+			[
+				"loginbu",
+				"client/directives/loginButtons/template.html"
+			],
+			[
+				"loginbut",
+				"client/directives/loginButtons/loginButtons.js"
+			],
+			[
+				"login",
+				"client/directives/loginButtons/loginButtons.js"
+			],
+			[
+				"asso",
+				"client/directives/associations/associations.js"
+			],
+			[
+				"projectli",
+				"client/components/projects/projectList.js"
+			],
+			[
+				"project",
+				"client/components/projects/projectList.js"
+			],
+			[
+				"subsc",
+				"lib/subscribeHelpers.js"
+			],
+			[
+				"ext",
+				"client/components/extdocs/views/extdocs-list.html"
+			],
+			[
+				"bulk",
+				"client/directives/bulkEdit/template.html"
+			],
+			[
+				"management",
+				"client/directives/managementAndTracing/template.html"
+			],
+			[
+				"personas",
+				"client/components/personas/views/personas-list.html"
+			],
+			[
+				"bulkedit",
+				"client/directives/bulkEdit/template.html"
+			],
+			[
+				"bulked",
+				"client/directives/bulkEdit/bulkEdit.js"
+			],
+			[
+				"projectme",
+				"server/methods/projectMethods.js"
+			],
+			[
+				"testcase",
+				"client/components/testcases/testcasesList.js"
+			],
+			[
+				"usecase",
+				"client/components/usecases/usecasesList.js"
+			],
+			[
+				"requireme",
+				"client/components/requirements/requirementsList.js"
+			],
+			[
+				"persona",
+				"client/components/personas/personasList.js"
+			],
+			[
+				"actor",
+				"client/components/actors/actorsList.js"
+			],
+			[
+				"stakeholder",
+				"client/components/stakeholders/stakeholdersList.js"
+			],
+			[
+				"visionli",
+				"client/components/visions/visionDetails.js"
+			],
+			[
+				"projectmeth",
+				"server/methods/projectMethods.js"
+			],
+			[
+				"usecasede",
+				"client/components/usecases/usecaseDetails.js"
+			],
+			[
+				"managemen",
+				"client/directives/managementAndTracing/managementAndTracing.js"
+			],
+			[
+				"user",
+				"client/directives/userPicker/userPicker.js"
+			],
+			[
+				"projectlist",
+				"client/components/projects/projectList.js"
+			],
+			[
+				"picture",
+				"client/directives/pictureAndPicker/pictureAndPicker.js"
+			],
+			[
+				"pictire",
+				"client/directives/pictureAndPicker/template.html"
+			],
+			[
+				"load",
+				"server/startup/load.js"
+			],
+			[
+				"browse",
+				"client/lib/app.browserify.js"
+			],
+			[
+				"route",
+				"client/lib/routes.js"
+			],
+			[
+				"view",
+				"client/components/viewport/views/viewport.html"
+			],
+			[
+				"model.js",
+				"model/model.js"
+			],
+			[
+				"enter",
+				"client/directives/enter.js"
+			],
+			[
+				"methods",
+				"server/methods/casMethods.js"
+			],
+			[
+				"model",
+				"model/model.js"
+			],
+			[
+				"requi",
+				"client/components/requirements/views/requirement-details.html"
+			],
+			[
+				"require",
+				"client/components/requirements/requirementDetails.js"
+			],
+			[
+				"test",
+				"client/components/testcases/views/testcase-details.html"
+			],
+			[
+				"viewpor",
+				"client/components/viewport/views/viewport.html"
+			],
+			[
+				"routes",
+				"client/lib/routes.js"
+			],
+			[
+				"virepo",
+				"client/components/viewport/views/viewport.html"
+			],
+			[
+				"inputlist",
+				"client/directives/inputList/template.html"
+			],
+			[
+				"glossary-moda",
+				"client/components/modal/views/glossary-modal.html"
+			],
+			[
+				"viewpoer",
+				"client/components/viewport/views/viewport.html"
+			],
+			[
+				"associ",
+				"client/directives/associations/associations.js"
+			],
+			[
+				"associa",
+				"client/directives/associations/associations.js"
+			],
+			[
+				"person",
+				"client/components/personas/personaDetails.js"
+			],
+			[
+				"app",
+				"client/lib/app.js"
+			],
+			[
+				"base",
+				"client/css/base.css"
+			],
+			[
+				"vieport",
+				"client/components/viewport/views/viewport.html"
+			],
+			[
+				"viewo",
+				"client/components/viewport/views/viewport.html"
+			],
+			[
+				"angular",
+				"client/modules/angular-selectize.js"
+			],
+			[
+				"angular-sele",
+				"client/modules/angular-selectize.js"
+			],
+			[
+				"stake",
+				"client/components/stakeholders/stakeholderDetails.js"
+			],
+			[
+				"viewport.cs",
+				"client/css/viewport.css"
+			],
+			[
+				"ang",
+				"client/modules/angular-selectize.js"
+			],
+			[
+				"invitem",
+				"server/methods/inviteMethods.js"
+			],
+			[
+				"queri",
+				"lib/queries.js"
+			],
+			[
+				"assum",
+				"client/components/assumptions/assumptionDetails.js"
+			],
+			[
+				"fileup",
+				"client/css/fileupload.css"
+			],
+			[
+				"proje",
+				"server/methods/projectMethods.js"
+			],
+			[
+				"quer",
+				"lib/queries.js"
+			],
+			[
+				"queries",
+				"lib/queries.js"
+			],
+			[
+				"metho",
+				"server/methods.js"
+			],
+			[
+				"projec",
+				"client/components/projects/projectList.js"
+			],
+			[
+				"team",
+				"client/components/team/teamDetails.js"
+			],
+			[
+				"home",
+				"client/components/home/views/home-details.html"
+			],
+			[
+				"stakeho",
+				"client/components/stakeholders/stakeholderDetails.js"
+			],
+			[
+				"goal",
+				"client/components/goals/goalDetails.js"
+			],
+			[
+				"req",
+				"client/components/requirements/requirementDetails.js"
+			],
+			[
+				"goalde",
+				"client/components/goals/goalDetails.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 237.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
