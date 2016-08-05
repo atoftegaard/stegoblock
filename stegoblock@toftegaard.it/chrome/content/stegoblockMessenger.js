@@ -1,39 +1,82 @@
-var StegoBlock = {
-	prefs: null,
-	keys: [],
-	
-	// Initialize the extension
+const sbCommon = window.StegoBlock();
+var sb = {
+	run: 0,
+	map: {},
+
+	elementMap: function(id) {
+		
+		if (this.map[id] === undefined)
+			this.map[id] = document.getElementById(id);
+		return this.map[id];
+	},
 	
 	startup: function(event) {	
 		
 		// Register listener for messagepane load
-
 		let messagepane = document.getElementById('messagepane');
-		messagepane.addEventListener('load', function(event) { this.onPageLoad(event); }, true);
+		let that = this;
+		messagepane.addEventListener('load', function(event) { that.onPageLoad(event); }, true);
 
-		// Register to receive notifications of preference changes
-		
-		this.prefs = Components.classes['@mozilla.org/preferences-service;1']
-				.getService(Components.interfaces.nsIPrefService)
-				.getBranch('stegoblock.');
-		this.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
-		this.prefs.addObserver('', this, false);
-		
-		this.keys = this.prefs.getCharPref('symbol');
+		/*sbCommon.observeCharPreferences('messagepane', function(prefs){
+			
+		});*/
 	},
 
 	onPageLoad: function(event) {
+		this.extractStegoBlockMessageHeader();
+	},
+
+	extractStegoBlockMessageHeader: function() {
 
 		let content = document.getElementById('stegoblock-content');
+		let contentBox = document.getElementById('stegoblock-content-box');
+		let disabledBox = document.getElementById('stegoblock-disabled-box');
+		let disabledLabel = document.getElementById('stegoblock-disabled-label');
 		let enumerator = gFolderDisplay.selectedMessages;
-
-		for each (let msgHdr in fixIterator(enumerator, Ci.nsIMsgDBHdr)) {
-
+		let prefs = sbCommon.getCharPref('addressesAndKeys');
+		let addressRegEx = /<(.*)>/;
+		contentBox.collapsed = true;
+		disabledBox.collapsed = true;
+		content.collapsed = false;
+		contentBox.collapsed = true;
+		content.value = '';
+		
+		for each (let msgHdr in fixIterator(enumerator, Ci.nsIMsgDBHdr)) {          
+			
 			MsgHdrToMimeMessage(msgHdr, null, function (aMsgHdr, aMimeMsg) {
 				try {
-					let ciphertext = aMimeMsg.get('X-Stegoblock');
-					let plaintext = CryptoJS.AES.decrypt(ciphertext, 'Secret').toString(CryptoJS.enc.Utf8);
 
+					let sender = aMimeMsg.headers.from.toString().trim();
+
+					// handle name <email> format
+
+					if (sender.indexOf('<') > 0) {
+
+						sender = addressRegEx.exec(sender)[1];
+						window.sender = sender;
+					}
+
+					let key;
+					for (let i = 0; i < prefs.length; i++)
+						if (prefs[i].addr === sender)
+							key = prefs[i].key;
+
+					let ciphertext = aMimeMsg.get('X-Stegoblock');
+					if(ciphertext.length === 0){
+						contentBox.collapsed = true;
+						return;
+					}
+
+					if (key === undefined) {
+						contentBox.collapsed = false;
+						disabledBox.collapsed = false;
+						content.collapsed = true;
+						disabledLabel.value = 'You have no shared StegoKey with ' + sender;
+					}
+
+					let plaintext = CryptoJS.AES.decrypt(ciphertext, key).toString(CryptoJS.enc.Utf8);
+
+					contentBox.collapsed = false;
 					content.value = plaintext;
 				} catch (err) {
 					//alert(err);
@@ -42,19 +85,35 @@ var StegoBlock = {
 		}
 	},
 	
-	shutdown: function() {
+	validateKey: function () {
 
-		this.prefs.removeObserver('', this);
-	},
-	
-	observe: function(subject, topic, data) {
+		let value = this.elementMap('stegoblock-add-key').value;
+		let button = this.elementMap('stegoblock-add-button');
 
-		if (topic != 'nsPref:changed')
+		if (value === undefined || value.length < 8) {
+			button.disabled = true;
 			return;
+		}
 
-		//alert('Pref changed: ' + data);
+		button.disabled = false;
+	},
+
+	addKey: function () {
+
+		let textbox = this.elementMap('stegoblock-add-key');
+		let key = textbox.value;
+
+		let prefs = sbCommon.getCharPref('addressesAndKeys');
+		prefs.push({ addr: window.sender, key: key });
+
+		sbCommon.setCharPref('addressesAndKeys', prefs);
+		this.extractStegoBlockMessageHeader();
 	}
-}
+};
 
-window.addEventListener('load', function(event) { StegoBlock.startup(event); }, false);
-window.addEventListener('unload', function(event) { StegoBlock.shutdown(event); }, false);
+
+
+
+//window.addEventListener('mail-startup-done', function (){ sb.startup(); }, false);
+//window.addEventListener('messagepane-loaded', function (){ sb.startup(); }, false);
+window.addEventListener('load', function (event) { sb.startup(event); }, false);

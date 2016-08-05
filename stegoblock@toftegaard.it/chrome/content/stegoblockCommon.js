@@ -64,6 +64,13 @@ var StegoBlock = function(){
 			return JSON.parse(this.prefs.getCharPref(key));
 		},
 
+		setCharPref: function(key, value) {
+			
+			initPreferences(this);
+
+			this.prefs.setCharPref(key, JSON.stringify(value));
+		},
+
 		forget: function(id) {
 			delete this.observeCallbacks[id];
 		}

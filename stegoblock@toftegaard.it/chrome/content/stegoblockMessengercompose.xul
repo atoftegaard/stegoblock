@@ -20,9 +20,8 @@
 					<label id="stegoblock-disabled-label" flex="1" style="color: grey; font-style: italic"/>
 				</hbox>
 				<hbox id="stegoblock-add-key-box">
-					<textbox id="stegoblock-add-key" placeholder="Key of at least 8 characters. Do not agree on this over email"
-						flex="1" onkeypress="sb.ui.validateKey()"/>
-					<button id="stegoblock-add-button" oncommand="sb.ui.addKey()" style="text-align: center">Add key</button>
+					<textbox id="stegoblock-add-key" placeholder="Shared secret key of at least 8 characters. Do not agree on this over email"	flex="1" onkeyup="sb.ui.validateKey()"/>
+					<button id="stegoblock-add-button" oncommand="sb.ui.addKey()" style="text-align: center" disabled="true">Add StegoKey</button>
 				</hbox>
 			</vbox>
 		</hbox>

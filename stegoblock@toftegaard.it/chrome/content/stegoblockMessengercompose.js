@@ -1,74 +1,86 @@
-var sbCommon = window.StegoBlock();
+const sbCommon = window.StegoBlock();
 window.sb = {
 	ui: {
+		addressNodeRegEx: /addressCol2/,
+		addressRegEx: /<(.*)>/,
+		map: {},
+		key: null,
+
+		elementMap: function(id) {
+			
+			if (this.map[id] === undefined)
+				this.map[id] = document.getElementById(id);
+			return this.map[id];
+		},
+
 		NotifyComposeFieldsReady: function() {			
-			sbCommon.observeCharPreferences('compose', function(prefs){
-				alert(prefs);
-			});
 
 			this.observeRecipientsByPolling();
 		},
 
 		observeRecipientsByPolling: function() {
 
-			//TODO: divide and conquer. element map
-			let addressingWidget = document.getElementById('addressingWidget');
-
-			var that = this;
+			let that = this;
 			setInterval(function() {
 
-				let dateRE = /addressCol2/;
-				let addrRE = /<(.*)>/;
-				let addresses = [];
-				let els = document.getElementsByTagName('*');
-
-				for each (let el in els)
-					if (dateRE.test(el.id)){
-						var val = document.getElementById(el.id).value.trim();
-						if(val.length > 0)
-							addresses.push(val);
-					}
+				let els = document.getElementsByTagName('*'); // get fresh collection each iteration
+				let addresses = that.getRecipients(els);
 				
 				if (addresses.length > 1)
 					that.disable('toomany');
-				else if(addresses[0] !== undefined){
-
-					let p = sbCommon.getCharPref('addressesAndKeys');
-					let recipient = addresses[0];
-
-					// handle name <email> format
-
-					if(recipient.indexOf('<') > 0)
-						recipient = addrRE.exec(recipient)[1]
-
-					// check if key is known for recipient
-
-					var found = false;
-					for(let i = 0; i < p.length; i++)
-						if(p[i].addr && (p[i].addr == recipient))
-							found = true;
-
-					if(found)
-						that.enable();
-					else
-						that.disable('nokey', recipient);
-				}
+				else if (addresses[0] !== undefined)
+					that.validateRecipientAndKey(addresses[0]);
 				else
-					that.enable();
+					that.enable(null); //needed??
 
 			}, 500);
+		},
+
+		getRecipients: function(elementsCollection){
+
+			let addresses = [];
+			for each (let element in elementsCollection) {
+				if (this.addressNodeRegEx.test(element.id)) {
+					let val = document.getElementById(element.id).value.trim();
+					if (val.length > 0)
+						addresses.push(val);
+				}
+			}
+			return addresses;
+		},
+
+		validateRecipientAndKey: function(recipient){
+
+			let prefs = sbCommon.getCharPref('addressesAndKeys');
+
+			// handle name <email> format
+
+			if (recipient.indexOf('<') > 0)
+				recipient = this.addressRegEx.exec(recipient)[1]
+
+			// check if key is known for recipient
+
+			let foundKey = false;
+			for (let i = 0; i < prefs.length; i++)
+				if (prefs[i].addr && (prefs[i].addr == recipient))
+					foundKey = prefs[i].key;
+
+			if (foundKey)
+				this.enable(foundKey);
+			else
+				this.disable('nokey', recipient);
 		},
 
 		disable: function (reason, extra) {
 			// runs every 500ms, fix.
 
-			let label = document.getElementById('stegoblock-disabled-label');
-			let box = document.getElementById('stegoblock-disabled-box');
-			let textbox = document.getElementById('stegoblock-textbox');
-			let addbox = document.getElementById('stegoblock-add-key-box');
+			let label = this.elementMap('stegoblock-disabled-label');
+			let box = this.elementMap('stegoblock-disabled-box');
+			let textbox = this.elementMap('stegoblock-textbox');
+			let addbox = this.elementMap('stegoblock-add-key-box');
 
 			let reasonText;
-			switch(reason) {
+			switch (reason) {
 				case 'toomany': {
 					reasonText = 'Stego Block only supports one recipient';
 					addbox.collapsed = true;
@@ -76,34 +88,36 @@ window.sb = {
 				}
 				case 'nokey': {
 					window.recipient = extra; // NOT HERE!!!
-					//document.getElementById('stegoblock-add-key').value = '';
-					reasonText = 'No key found for ' + extra;
+					//this.elementMap('stegoblock-add-key').value = '';
+					reasonText = 'No StegoKey found for ' + extra;
 					addbox.collapsed = false;
 					this.validateKey();
 					break;
 				}
 			}
 
+			this.key = null;
 			label.value = reasonText;
 			box.collapsed = false;
 			textbox.collapsed = true;
 		},
 
-		enable: function () {
+		enable: function (key) {
 
-			let box = document.getElementById('stegoblock-disabled-box');
-			let textbox = document.getElementById('stegoblock-textbox');
+			let box = this.elementMap('stegoblock-disabled-box');
+			let textbox = this.elementMap('stegoblock-textbox');
 
+			this.key = key;
 			box.collapsed = true;
 			textbox.collapsed = false;
 		},
 
 		validateKey: function () {
 
-			let value = document.getElementById('stegoblock-add-key').value;
-			let button = document.getElementById('stegoblock-add-button');
+			let value = this.elementMap('stegoblock-add-key').value;
+			let button = this.elementMap('stegoblock-add-button');
 			
-			if(value === undefined || value.length < 8) {
+			if (value === undefined || value.length < 8) {
 				button.disabled = true;
 				return;
 			}
@@ -113,24 +127,21 @@ window.sb = {
 
 		addKey: function () {
 
-			let textbox = document.getElementById('stegoblock-add-key');
-			var key = textbox.value;
+			let textbox = this.elementMap('stegoblock-add-key');
+			let key = textbox.value;
 
-			let prefs = Components.classes['@mozilla.org/preferences-service;1']
-						.getService(Components.interfaces.nsIPrefService)
-						.getBranch('stegoblock.');
-			
-			let p = JSON.parse(prefs.getCharPref('addressesAndKeys'));
-			p.push({ addr: window.recipient, key: key });
+			let prefs = sbCommon.getCharPref('addressesAndKeys');
+			prefs.push({ addr: window.recipient, key: key });
 
-			prefs.setCharPref('addressesAndKeys', JSON.stringify(p));
+			sbCommon.setCharPref('addressesAndKeys', prefs);
 		}
 	},
 
-	composeSendMessageHandler: function (event) {
+	injectStegoBlockInMessageHeader: function (event) {
 
+		let prefs = sbCommon.getCharPref('addressesAndKeys');
 		let plaintext = document.getElementById('stegoblock-textbox').value;
-		let ciphertext = CryptoJS.AES.encrypt(plaintext, 'Secret').toString();
+		let ciphertext = CryptoJS.AES.encrypt(plaintext, window.sb.ui.key).toString();
 		//let foldedCiphertext = this.fold(ciphertext);
 
 		gMsgCompose.compFields.setHeader('X-Stegoblock', ciphertext);
@@ -141,6 +152,8 @@ window.sb = {
 		let textArr = [];
 		let fold = [];
 		let len = 66;
+
+		// iterate chars and break after max length
 
 		for (let i = 0; i < text.length; i++) {
 			if (i % len === 0) {
@@ -157,12 +170,12 @@ window.sb = {
 	ascii: function (string) {
 
 		let arr = [];
-		for(let i = 0; i < string.length; i++)
+		for (let i = 0; i < string.length; i++)
 			arr.push(string.charCodeAt(i));
 
 		return arr.join('');
 	}
 };
 
-window.addEventListener('compose-send-message', window.sb.composeSendMessageHandler, true);
+window.addEventListener('compose-send-message', window.sb.injectStegoBlockInMessageHeader, true);
 window.addEventListener('compose-window-init', function(){ gMsgCompose.RegisterStateListener(window.sb.ui); }, true);

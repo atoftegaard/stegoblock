@@ -7,7 +7,7 @@
 	<script type="application/javascript" src="chrome://stegoblock/content/stegoblockMessenger.js"/>
 	
 	<vbox id="expandedHeadersBox">
-		<hbox id="stegoblock-content-box">
+		<hbox id="stegoblock-content-box" collapsed="true">
 
 			<grid flex="1" id="stegoblock-grid">
 				<columns id="stegoblock-columns">
@@ -18,7 +18,18 @@
 				<rows id="stegoblock-rows">
 					<row>
 						<label id="stegoblock-header" value="Stego Block" class="headerName"/>
-						<label id="stegoblock-content" flex="1"/>
+						<hbox>
+							<label id="stegoblock-content" flex="1"/>
+							<vbox id="stegoblock-disabled-box" collapsed="true" flex="1">
+								<hbox>
+									<label id="stegoblock-disabled-label" flex="1" style="color: grey; font-style: italic"/>
+								</hbox>
+								<hbox id="stegoblock-add-key-box">
+									<textbox id="stegoblock-add-key" placeholder="Shared secret key of at least 8 characters. Do not agree on this over email"	flex="1" onkeyup="sb.validateKey()"/>
+									<button id="stegoblock-add-button" oncommand="sb.addKey()" style="text-align: center" disabled="true">Add StegoKey</button>
+								</hbox>
+							</vbox>
+						</hbox>
 					</row>
 				</rows>
 			</grid>

@@ -3,14 +3,17 @@
  
 <prefwindow id="stegoblock-prefs" title="Stego Block Options" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
+	<script type="application/javascript" src="chrome://stegoblock/content/json2.js"/>
+	<script type="application/javascript" src="chrome://stegoblock/content/stegoblockCommon.js"/>
 	<script type="application/javascript" src="chrome://stegoblock/content/options.js"/>
 
-	<prefpane id="stegoblock-stettings-pane" label="Stego Block key store">
+	<prefpane id="stegoblock-stettings-pane" label="StegoKey store">
 		<preferences>
 			<preference id="pref_symbol" name="stegoblock.symbol" type="string"/>
 		</preferences>
 
-		<listbox id="stegoblock-address-key-list" rows="10" width="400">
+		<listbox id="stegoblock-address-key-list" rows="10" width="400" seltype="multiple"
+			onselect="sb.onlistselect(this.selectedItems)">
 			<listhead>
 				<listheader label="Address" width="250"/>
 				<listheader label="Key" width="150"/>
@@ -20,6 +23,11 @@
 				<listcol flex="1"/>
 			</listcols>
 		</listbox>
+
+		<hbox flex="1">
+			<button id="stegoblock-delete-key" flex="2" style="text-align:center" oncommand="sb.onDelete()" disabled="true">Delete</button>
+			<button flex="2" style="text-align:center">Purge StegoKey store</button>
+		</hbox>
 
 	</prefpane>
 
