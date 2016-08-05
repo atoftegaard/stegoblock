@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+ 
+<prefwindow id="stegoblock-prefs" title="Stego Block Options" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/javascript" src="chrome://stegoblock/content/options.js"/>
+
+	<prefpane id="stegoblock-stettings-pane" label="Stego Block key store">
+		<preferences>
+			<preference id="pref_symbol" name="stegoblock.symbol" type="string"/>
+		</preferences>
+
+		<listbox id="stegoblock-address-key-list" rows="10" width="400">
+			<listhead>
+				<listheader label="Address" width="250"/>
+				<listheader label="Key" width="150"/>
+			</listhead>
+			<listcols>
+				<listcol/>
+				<listcol flex="1"/>
+			</listcols>
+		</listbox>
+
+	</prefpane>
+
+</prefwindow>

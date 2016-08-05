@@ -1,30 +1,60 @@
-window.addEventListener('load', function(event) { load(event); }, false);
-
-function load() {
-
-	let content = document.getElementById('stegoblock-content');
-	let messagepane = document.getElementById('messagepane');
+var StegoBlock = {
+	prefs: null,
+	keys: [],
 	
-	messagepane.addEventListener('load', function(event) { onPageLoad(event); }, true);
-}
+	// Initialize the extension
+	
+	startup: function(event) {	
+		
+		// Register listener for messagepane load
 
-function onPageLoad(event) {
+		let messagepane = document.getElementById('messagepane');
+		messagepane.addEventListener('load', function(event) { this.onPageLoad(event); }, true);
 
-	let content = document.getElementById('stegoblock-content');
-	let enumerator = gFolderDisplay.selectedMessages;
+		// Register to receive notifications of preference changes
+		
+		this.prefs = Components.classes['@mozilla.org/preferences-service;1']
+				.getService(Components.interfaces.nsIPrefService)
+				.getBranch('stegoblock.');
+		this.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
+		this.prefs.addObserver('', this, false);
+		
+		this.keys = this.prefs.getCharPref('symbol');
+	},
 
-	for each (let msgHdr in fixIterator(enumerator, Ci.nsIMsgDBHdr)) {
+	onPageLoad: function(event) {
 
-		MsgHdrToMimeMessage(msgHdr, null, function (aMsgHdr, aMimeMsg) {
-			try {
-				let ciphertext = aMimeMsg.get('X-Stegoblock');
-				let plaintext = CryptoJS.AES.decrypt(ciphertext, 'Secret').toString(CryptoJS.enc.Utf8);
+		let content = document.getElementById('stegoblock-content');
+		let enumerator = gFolderDisplay.selectedMessages;
 
-				content.value = plaintext;
-			} catch (err) {
-				//alert(err);
-			}
-		}, true, { examineEncryptedParts: true });
+		for each (let msgHdr in fixIterator(enumerator, Ci.nsIMsgDBHdr)) {
 
+			MsgHdrToMimeMessage(msgHdr, null, function (aMsgHdr, aMimeMsg) {
+				try {
+					let ciphertext = aMimeMsg.get('X-Stegoblock');
+					let plaintext = CryptoJS.AES.decrypt(ciphertext, 'Secret').toString(CryptoJS.enc.Utf8);
+
+					content.value = plaintext;
+				} catch (err) {
+					//alert(err);
+				}
+			}, true, { examineEncryptedParts: true });
+		}
+	},
+	
+	shutdown: function() {
+
+		this.prefs.removeObserver('', this);
+	},
+	
+	observe: function(subject, topic, data) {
+
+		if (topic != 'nsPref:changed')
+			return;
+
+		//alert('Pref changed: ' + data);
 	}
 }
+
+window.addEventListener('load', function(event) { StegoBlock.startup(event); }, false);
+window.addEventListener('unload', function(event) { StegoBlock.shutdown(event); }, false);

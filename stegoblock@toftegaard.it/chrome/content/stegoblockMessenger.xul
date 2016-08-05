@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
 <overlay id="stegoblockMessenger" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	
-	<script type="application/javascript" src="chrome://stegoblock/content/stegoblockMessenger.js"/>
+	<script type="application/javascript" src="chrome://stegoblock/content/json2.js"/>
 	<script type="application/javascript" src="chrome://stegoblock/content/aes.js"/>
+	<script type="application/javascript" src="chrome://stegoblock/content/stegoblockCommon.js"/>
+	<script type="application/javascript" src="chrome://stegoblock/content/stegoblockMessenger.js"/>
 	
 	<vbox id="expandedHeadersBox">
 		<hbox id="stegoblock-content-box">

@@ -8,6 +8,7 @@
 		<em:description>Steganographic approach to emails</em:description>
 		<em:version>0.1</em:version>
 		<em:creator>Andreas Toftegaard</em:creator>
+		<em:optionsURL>chrome://stegoblock/content/options.xul</em:optionsURL>
 		<em:updateURL>https://toftegaard.it/stegoblock/update.rdf</em:updateURL>
 
 		<em:targetApplication>
