@@ -8,12 +8,13 @@
 	
 	<vbox id="addresses-box">
 		<hbox id="stegoblock-message-box">
-			<hbox style="width: 11.5em;" pack="end">
-				<label id="stegoblock-message-label" value="Stego Block:" control="stegoblock-content"/>
-			</hbox>
+			<vbox style="width: 11.5em;" pack="end">
+				<label id="stegoblock-message-label" value="Stego Block:" control="stegoblock-content" style="text-align: right"/>
+				<label id="stegoblock-message-length" flex="1" style="color: grey; font-style: italic; text-align: right"/>
+			</vbox>
 			
 			<textbox multiline="true" id="stegoblock-textbox" flex="1" placeholder="Embed a secondary message"
-				name="stegoblock.message.body" minheight="50"/>
+				name="stegoblock.message.body" minheight="50" onkeyup="sb.ui.setRemainingCharCount()"/>
 
 			<vbox id="stegoblock-disabled-box" collapsed="true" flex="1">
 				<hbox>
@@ -21,7 +22,7 @@
 				</hbox>
 				<hbox id="stegoblock-add-key-box">
 					<textbox id="stegoblock-add-key" placeholder="Shared secret key of at least 8 characters. Do not agree on this over email"	flex="1" onkeyup="sb.ui.validateKey()"/>
-					<button id="stegoblock-add-button" oncommand="sb.ui.addKey()" style="text-align: center" disabled="true">Add StegoKey</button>
+					<button id="stegoblock-add-button" oncommand="sb.ui.addKey()" style="text-align: center">Add StegoKey</button>
 				</hbox>
 			</vbox>
 		</hbox>

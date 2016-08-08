@@ -26,7 +26,7 @@
 
 		<hbox flex="1">
 			<button id="stegoblock-delete-key" flex="2" style="text-align:center" oncommand="sb.onDelete()" disabled="true">Delete</button>
-			<button flex="2" style="text-align:center">Purge StegoKey store</button>
+			<button id="stegoblock-purge" flex="2" oncommand="sb.onPurge()" style="text-align:center">Purge StegoKey store</button>
 		</hbox>
 
 	</prefpane>

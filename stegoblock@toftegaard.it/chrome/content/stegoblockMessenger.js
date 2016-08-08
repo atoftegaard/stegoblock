@@ -39,7 +39,7 @@ var sb = {
 		disabledBox.collapsed = true;
 		content.collapsed = false;
 		contentBox.collapsed = true;
-		content.value = '';
+		content.childNodes[0].nodeValue = '';
 		
 		for each (let msgHdr in fixIterator(enumerator, Ci.nsIMsgDBHdr)) {          
 			
@@ -62,6 +62,10 @@ var sb = {
 							key = prefs[i].key;
 
 					let ciphertext = aMimeMsg.get('X-Stegoblock');
+
+					ciphertext = ciphertext.replace(new RegExp(' ', 'g'), '');
+					ciphertext = ciphertext.replace(new RegExp('\r\n', 'g'), '');
+
 					if(ciphertext.length === 0){
 						contentBox.collapsed = true;
 						return;
@@ -74,10 +78,15 @@ var sb = {
 						disabledLabel.value = 'You have no shared StegoKey with ' + sender;
 					}
 
-					let plaintext = CryptoJS.AES.decrypt(ciphertext, key).toString(CryptoJS.enc.Utf8);
+					let plaintext = CryptoJS.AES.decrypt(ciphertext, key, {
+						mode: CryptoJS.mode.CBC,
+						padding: CryptoJS.pad.Pkcs7
+					}).toString(CryptoJS.enc.Utf8);
+
+					plaintext = plaintext.substring(0, plaintext.lastIndexOf('//'));
 
 					contentBox.collapsed = false;
-					content.value = plaintext;
+					content.childNodes[0].nodeValue = plaintext;
 				} catch (err) {
 					//alert(err);
 				}
@@ -108,6 +117,8 @@ var sb = {
 
 		sbCommon.setCharPref('addressesAndKeys', prefs);
 		this.extractStegoBlockMessageHeader();
+
+		textbox.value = '';
 	}
 };
 

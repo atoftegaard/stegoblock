@@ -19,7 +19,7 @@
 					<row>
 						<label id="stegoblock-header" value="Stego Block" class="headerName"/>
 						<hbox>
-							<label id="stegoblock-content" flex="1"/>
+							<description id="stegoblock-content" flex="1"> </description>
 							<vbox id="stegoblock-disabled-box" collapsed="true" flex="1">
 								<hbox>
 									<label id="stegoblock-disabled-label" flex="1" style="color: grey; font-style: italic"/>

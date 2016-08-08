@@ -10,6 +10,7 @@
 		<em:creator>Andreas Toftegaard</em:creator>
 		<em:optionsURL>chrome://stegoblock/content/options.xul</em:optionsURL>
 		<em:updateURL>https://toftegaard.it/stegoblock/update.rdf</em:updateURL>
+		<em:iconURL>chrome://stegoblock/content/icon.png</em:iconURL>
 
 		<em:targetApplication>
 			<Description>
