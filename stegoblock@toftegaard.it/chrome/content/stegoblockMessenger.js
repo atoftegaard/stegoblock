@@ -1,8 +1,13 @@
 const sbCommon = window.StegoBlock();
 var sb = {
-	run: 0,
+
+	// stores references to elements, for fast access
 	map: {},
 
+	// storage for the sender of a selected email
+	sender: null,
+
+	// gets an element by id, from the map or DOM, if not already in the map
 	elementMap: function(id) {
 		
 		if (this.map[id] === undefined)
@@ -10,96 +15,123 @@ var sb = {
 		return this.map[id];
 	},
 	
+	// add listener messagepane loading
 	startup: function(event) {	
 		
-		// Register listener for messagepane load
-		let messagepane = document.getElementById('messagepane');
+		let messagepane = this.elementMap('messagepane');
 		let that = this;
 		messagepane.addEventListener('load', function(event) { that.onPageLoad(event); }, true);
-
-		/*sbCommon.observeCharPreferences('messagepane', function(prefs){
-			
-		});*/
 	},
 
+	// fired when messagepane is ready
 	onPageLoad: function(event) {
-		this.extractStegoBlockMessageHeader();
+
+		this.handleMessageSelection();
 	},
 
-	extractStegoBlockMessageHeader: function() {
+	// when a message is selected, headers are checked for a StegoBlock.
+	// if one is present, it will be tried decrypted and shown to the user.
+	handleMessageSelection: function() {
 
-		let content = document.getElementById('stegoblock-content');
-		let contentBox = document.getElementById('stegoblock-content-box');
-		let disabledBox = document.getElementById('stegoblock-disabled-box');
-		let disabledLabel = document.getElementById('stegoblock-disabled-label');
 		let enumerator = gFolderDisplay.selectedMessages;
-		let prefs = sbCommon.getCharPref('addressesAndKeys');
-		let addressRegEx = /<(.*)>/;
-		contentBox.collapsed = true;
-		disabledBox.collapsed = true;
-		content.collapsed = false;
-		contentBox.collapsed = true;
-		content.childNodes[0].nodeValue = '';
-		
+		let that = this;
+
+		// iterate over all selected emails
 		for each (let msgHdr in fixIterator(enumerator, Ci.nsIMsgDBHdr)) {          
 			
+			// extract all headers as MIME messages
 			MsgHdrToMimeMessage(msgHdr, null, function (aMsgHdr, aMimeMsg) {
+
 				try {
 
-					let sender = aMimeMsg.headers.from.toString().trim();
+					// trial and error. first from then to - ensures that StegoBlocks in
+					// sent mails can be read. not very elegant, but apparently there is
+					// no way to distinguish if a mail is in a "sent" folder.
+					if(!that.extractStegoHeader(aMimeMsg.headers.from.toString().trim(), aMimeMsg))
+						that.extractStegoHeader(aMimeMsg.headers.to.toString().trim(), aMimeMsg);
 
-					// handle name <email> format
-
-					if (sender.indexOf('<') > 0) {
-
-						sender = addressRegEx.exec(sender)[1];
-						window.sender = sender;
-					}
-
-					let key;
-					for (let i = 0; i < prefs.length; i++)
-						if (prefs[i].addr === sender)
-							key = prefs[i].key;
-
-					let ciphertext = aMimeMsg.get('X-Stegoblock');
-
-					ciphertext = ciphertext.replace(new RegExp(' ', 'g'), '');
-					ciphertext = ciphertext.replace(new RegExp('\r\n', 'g'), '');
-
-					if(ciphertext.length === 0){
-						contentBox.collapsed = true;
-						return;
-					}
-
-					if (key === undefined) {
-						contentBox.collapsed = false;
-						disabledBox.collapsed = false;
-						content.collapsed = true;
-						disabledLabel.value = 'You have no shared StegoKey with ' + sender;
-					}
-
-					let plaintext = CryptoJS.AES.decrypt(ciphertext, key, {
-						mode: CryptoJS.mode.CBC,
-						padding: CryptoJS.pad.Pkcs7
-					}).toString(CryptoJS.enc.Utf8);
-
-					plaintext = plaintext.substring(0, plaintext.lastIndexOf('//'));
-
-					contentBox.collapsed = false;
-					content.childNodes[0].nodeValue = plaintext;
 				} catch (err) {
-					//alert(err);
+
 				}
 			}, true, { examineEncryptedParts: true });
 		}
 	},
+
+	extractStegoHeader: function(sender, aMimeMsg) {
+
+		let cont = this.elementMap('stegoblock-content');
+		let contentBox = this.elementMap('stegoblock-content-box');
+		let disabledBox = this.elementMap('stegoblock-disabled-box');
+		let disabledLabel = this.elementMap('stegoblock-disabled-label');
+		let prefs = sbCommon.getCharPref('addressesAndKeys');
+		let addressRegEx = /<(.*)>/;
+
+		contentBox.collapsed = true;
+		disabledBox.collapsed = true;
+		cont.collapsed = false;
+		contentBox.collapsed = true;
+		cont.childNodes[0].nodeValue = ''; // hacky way to set value of a description node
+
+		// handle "name <email>" format
+		if (sender.indexOf('<') > 0) {
+
+			sender = addressRegEx.exec(sender)[1];
+			this.sender = sender;
+		}
+
+		// find matching StegoKey for sender
+		let key;
+		for (let i = 0; i < prefs.length; i++)
+			if (prefs[i].addr === sender)
+				key = prefs[i].key;
+
+		// extract encrypted header and remove any line breaks or whitespaces
+		let ciphertext = aMimeMsg.get('X-Stegoblock');
+		ciphertext = ciphertext.replace(new RegExp(' ', 'g'), '');
+		ciphertext = ciphertext.replace(new RegExp('\r\n', 'g'), '');
+
+		// do not show any StegoBlock UI if email does not contain a StegoBlock
+		if (ciphertext.length === 0) {
+
+			contentBox.collapsed = true;
+			return false;
+		}
+
+		// there is a StegoBlock, but no matching StegoKey. show UI for adding one.
+		if (key === undefined) {
+
+			contentBox.collapsed = false;
+			disabledBox.collapsed = false;
+			cont.collapsed = true;
+			disabledLabel.value = 'You have no shared StegoKey with ' + sender;
+			return false;
+		}
+
+		// decrypt the StegoBlock
+		let plaintext = CryptoJS.AES.decrypt(ciphertext, key, {
+
+			mode: CryptoJS.mode.CBC,
+			padding: CryptoJS.pad.Pkcs7
+		}).toString(CryptoJS.enc.Utf8);
+
+		// strip away any random right padding (if message is less than maxMessageLength)
+		plaintext = plaintext.substring(0, plaintext.lastIndexOf('//'));
+
+		contentBox.collapsed = false;
+		cont.childNodes[0].nodeValue = plaintext;
+
+		return true;
+	},
 	
+	// fired on keyup when trying to add a new StegoKey
+	// validates if the key meets basic requirements, like length
 	validateKey: function () {
 
 		let value = this.elementMap('stegoblock-add-key').value;
 		let button = this.elementMap('stegoblock-add-button');
 
 		if (value === undefined || value.length < 8) {
+
 			button.disabled = true;
 			return;
 		}
@@ -107,24 +139,20 @@ var sb = {
 		button.disabled = false;
 	},
 
+	// adds a new (valid) StegoKey to the preferences
 	addKey: function () {
 
 		let textbox = this.elementMap('stegoblock-add-key');
 		let key = textbox.value;
 
 		let prefs = sbCommon.getCharPref('addressesAndKeys');
-		prefs.push({ addr: window.sender, key: key });
+		prefs.push({ addr: this.sender, key: key });
 
 		sbCommon.setCharPref('addressesAndKeys', prefs);
-		this.extractStegoBlockMessageHeader();
+		this.handleMessageSelection();
 
 		textbox.value = '';
 	}
 };
 
-
-
-
-//window.addEventListener('mail-startup-done', function (){ sb.startup(); }, false);
-//window.addEventListener('messagepane-loaded', function (){ sb.startup(); }, false);
 window.addEventListener('load', function (event) { sb.startup(event); }, false);

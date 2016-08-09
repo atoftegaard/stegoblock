@@ -1,5 +1,6 @@
 var StegoBlock = function(){
 
+	// gets the StegoBlock extension preferences.
 	var initPreferences = function(obj) {
 		
 		if(obj.prefs)
@@ -12,9 +13,13 @@ var StegoBlock = function(){
 
 	return {
 
+		// shortcut for the extensions preferences
 		prefs: null,
+
+		// stores callbacks for the preference observer
 		observeCallbacks: {},
 
+		// convenience utilities, nice to have
 		utils: {
 
 			// native JS implementation for extending objects. somewhat similar to jQuery.extend()
@@ -27,10 +32,12 @@ var StegoBlock = function(){
 					for(var key in arguments[i])
 						if(arguments[i].hasOwnProperty(key))
 							arguments[0][key] = arguments[i][key];
+
 				return arguments[0];
 			}
 		},
 
+		// register a callback that gets fired when preferences change
 		observeCharPreferences: function(id, callback) {
 
 			if(this.prefs === null){
@@ -57,6 +64,7 @@ var StegoBlock = function(){
 				this.observeCallbacks[id] = callback;
 		},
 
+		// get specific char preference as an object
 		getCharPref: function(key) {
 			
 			initPreferences(this);
@@ -64,6 +72,7 @@ var StegoBlock = function(){
 			return JSON.parse(this.prefs.getCharPref(key));
 		},
 
+		// set specific char preference with an object. object gets stored serialied.
 		setCharPref: function(key, value) {
 			
 			initPreferences(this);
@@ -71,10 +80,13 @@ var StegoBlock = function(){
 			this.prefs.setCharPref(key, JSON.stringify(value));
 		},
 
+		// unregister a previously registered callback for preference change
 		forget: function(id) {
+
 			delete this.observeCallbacks[id];
 		}
 	};
 };
 
+// extend the global variable with common functionality, for easy access
 StegoBlock.utils.extend(window.StegoBlock, StegoBlock());
