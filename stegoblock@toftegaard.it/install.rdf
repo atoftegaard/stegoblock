@@ -11,7 +11,7 @@
 
 Stego Blocks are encrypted with 256 bit AES.-->
 
-		<em:version>1.0</em:version>
+		<em:version>1.0.1</em:version>
 		<em:creator>Andreas Toftegaard</em:creator>
 		<em:optionsURL>chrome://stegoblock/content/options.xul</em:optionsURL>
 		<em:iconURL>chrome://stegoblock/content/icon.png</em:iconURL>
