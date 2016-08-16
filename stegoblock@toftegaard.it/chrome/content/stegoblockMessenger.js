@@ -30,7 +30,7 @@ var sb = {
 	},
 
 	// when a message is selected, headers are checked for a StegoBlock.
-	// if one is present, it will be tried decrypted and shown to the user.
+	// if one is present, it will be tried shown to the user.
 	handleMessageSelection: function() {
 
 		let enumerator = gFolderDisplay.selectedMessages;
@@ -47,7 +47,7 @@ var sb = {
 					// trial and error. first from then to - ensures that StegoBlocks in
 					// sent mails can be read. not very elegant, but apparently there is
 					// no way to distinguish if a mail is in a "sent" folder.
-					if(!that.extractStegoHeader(aMimeMsg.headers.from.toString().trim(), aMimeMsg))
+					if (!that.extractStegoHeader(aMimeMsg.headers.from.toString().trim(), aMimeMsg))
 						that.extractStegoHeader(aMimeMsg.headers.to.toString().trim(), aMimeMsg);
 
 				} catch (err) {
@@ -85,10 +85,10 @@ var sb = {
 			if (prefs[i].addr === sender)
 				key = prefs[i].key;
 
-		// extract encrypted header and remove any line breaks or whitespaces
-		let ciphertext = aMimeMsg.get('X-Stegoblock');
-		ciphertext = ciphertext.replace(new RegExp(' ', 'g'), '');
-		ciphertext = ciphertext.replace(new RegExp('\r\n', 'g'), '');
+		// extract header
+		let ciphertext = aMimeMsg.get('X-Stegoblock').toString();
+
+		ciphertext = ciphertext.replace(new RegExp('\\s+|\r|\n', 'g'), '');
 
 		// do not show any StegoBlock UI if email does not contain a StegoBlock
 		if (ciphertext.length === 0) {
@@ -107,15 +107,17 @@ var sb = {
 			return false;
 		}
 
-		// decrypt the StegoBlock
-		let plaintext = CryptoJS.AES.decrypt(ciphertext, key, {
-
-			mode: CryptoJS.mode.CBC,
-			padding: CryptoJS.pad.Pkcs7
-		}).toString(CryptoJS.enc.Utf8);
+		// show the StegoBlock
+		var plaintext;
+		try{
+			plaintext = sbCommon.steganography.show(ciphertext, key);
+		} catch (e){
+			contentBox.collapsed = false;
+			cont.childNodes[0].nodeValue = e;
+		}
 
 		// strip away any random right padding (if message is less than maxMessageLength)
-		plaintext = plaintext.substring(0, plaintext.lastIndexOf('//'));
+		//plaintext = plaintext.substring(0, plaintext.lastIndexOf('//'));
 
 		contentBox.collapsed = false;
 		cont.childNodes[0].nodeValue = plaintext;

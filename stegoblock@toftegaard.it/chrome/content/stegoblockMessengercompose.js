@@ -1,5 +1,6 @@
 const sbCommon = window.StegoBlock();
-var sb = {
+let sb = {
+
 	ui: {
 		
 		// maximum StegoBlock message length
@@ -25,6 +26,7 @@ var sb = {
 			
 			if (this.map[id] === undefined)
 				this.map[id] = document.getElementById(id);
+
 			return this.map[id];
 		},
 
@@ -208,14 +210,10 @@ var sb = {
 		let plaintext = document.getElementById('stegoblock-textbox').value;
 
 		// fill up remaining message space with bogus
-		plaintext = sb.padRemaining(plaintext);
+		//plaintext = sb.padRemaining(plaintext);
 		
-		// encrypt!
-		let ciphertext = CryptoJS.AES.encrypt(plaintext, sb.ui.key || sb.randomString(128), {
-
-			mode: CryptoJS.mode.CBC,
-			padding: CryptoJS.pad.Pkcs7
-		}).toString();
+		// hide!
+		let ciphertext = sbCommon.steganography.hide(plaintext, sb.ui.key || sb.randomString(128));
 
 		// fold headers, as lines cannot exceed 78 chars
 		ciphertext = sb.fold(ciphertext);
@@ -260,10 +258,14 @@ var sb = {
 
 		let ret = [];
 		let len;
-		let n = 50;
+		let n = 63;
 
-		for(let i = 0, len = str.length; i < len; i += n)
-			ret.push(str.substr(i, n))
+		for (let i = 0, len = str.length; i < len; i += n) {
+
+			if (i === n)
+				n += 13;
+			ret.push(str.substr(i, n));
+		}
 
 		return ret.join(' ');
 	}
