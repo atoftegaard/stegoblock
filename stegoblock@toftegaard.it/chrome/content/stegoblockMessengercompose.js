@@ -1,5 +1,5 @@
 const sbCommon = window.StegoBlock();
-let sb = {
+var sb = {
 
 	ui: {
 		
