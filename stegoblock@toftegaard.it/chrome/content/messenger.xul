@@ -3,8 +3,9 @@
 	
 	<script type="application/javascript" src="chrome://stegoblock/content/json2.js"/>
 	<script type="application/javascript" src="chrome://stegoblock/content/seedrandom.js"/>
-	<script type="application/javascript" src="chrome://stegoblock/content/stegoblockCommon.js"/>
-	<script type="application/javascript" src="chrome://stegoblock/content/stegoblockMessenger.js"/>
+	<script type="application/javascript" src="chrome://stegoblock/content/common.js"/>
+	<script type="application/javascript" src="chrome://stegoblock/content/steganography.js"/>
+	<script type="application/javascript" src="chrome://stegoblock/content/messenger.js"/>
 	
 	<vbox id="expandedHeadersBox">
 		<hbox id="stegoblock-content-box" collapsed="true">

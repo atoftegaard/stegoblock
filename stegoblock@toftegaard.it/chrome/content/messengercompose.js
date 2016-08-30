@@ -1,4 +1,6 @@
 const sbCommon = window.StegoBlock();
+const sbStego = window.Stego();
+
 var sb = {
 
 	ui: {
@@ -50,13 +52,13 @@ var sb = {
 
 				let els = document.getElementsByTagName('*'); // get fresh collection each iteration
 				let addresses = that.getRecipients(els);
-				
+
 				if (addresses.length > 1)
 					that.disable('toomany');
 				else if (addresses[0] !== undefined)
 					that.validateRecipientAndKey(addresses[0]);
 				else
-					that.enable(null);
+					that.enable(null); // in case of no recipient, just show the textarea
 
 			}, 500);
 		},
@@ -67,9 +69,9 @@ var sb = {
 			let addresses = [];
 			for (let element in elementsCollection) {
 
-				if (this.addressNodeRegEx.test(element.id)) {
+				if (this.addressNodeRegEx.test(elementsCollection[element].id)) {
 
-					let val = document.getElementById(element.id).value.trim();
+					let val = document.getElementById(elementsCollection[element].id).value.trim();
 					if (val.length > 0)
 						addresses.push(val);
 				}
@@ -99,7 +101,7 @@ var sb = {
 				this.disable('nokey', recipient);
 		},
 
-		// disables the StegoBlock textarea for any given reason.
+		// disables the StegoBlock textarea for a specified reason.
 		disable: function (reason, extra) {
 
 			let label = this.elementMap('stegoblock-disabled-label');
@@ -211,7 +213,7 @@ var sb = {
 		let date = new Date().toString();
 		
 		// hide!
-		let ciphertext = sbCommon.steganography.hide(plaintext, date + sb.ui.key || sb.randomString(128));
+		let ciphertext = sbStego.hide(plaintext, date + sb.ui.key || sb.randomString(128));
 
 		// fold headers, as lines cannot exceed 78 chars
 		ciphertext = sb.fold(ciphertext);

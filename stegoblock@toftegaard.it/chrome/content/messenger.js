@@ -1,4 +1,6 @@
 const sbCommon = window.StegoBlock();
+const sbStego = window.Stego();
+
 var sb = {
 
 	// stores references to elements, for fast access
@@ -110,9 +112,11 @@ var sb = {
 
 		// show the StegoBlock
 		var plaintext;
-		try{
-			plaintext = sbCommon.steganography.show(ciphertext, date + key);
+		try {
+
+			plaintext = sbStego.show(ciphertext, date + key);
 		} catch (e){
+
 			contentBox.collapsed = false;
 			cont.childNodes[0].nodeValue = e;
 		}
