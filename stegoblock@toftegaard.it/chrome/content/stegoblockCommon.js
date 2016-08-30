@@ -28,8 +28,8 @@ var StegoBlock = function(){
 				if (typeof(arguments[0]) === undefiend)
 					arguments[0] = {};
 
-				for (var i = 1; i < arguments.length; i++)
-					for (var key in arguments[i])
+				for (let i = 1; i < arguments.length; i++)
+					for (let key in arguments[i])
 						if (arguments[i].hasOwnProperty(key))
 							arguments[0][key] = arguments[i][key];
 
@@ -41,11 +41,7 @@ var StegoBlock = function(){
 
 			blockLength: 4096,
 				
-			alphabet: null,
-			
-			alphabetCount: 0,
-
-			lettersAndFrequency: {
+			alphabetFrequencies: {
 				
 				' ': 18.31685753,
 				'e': 10.21787708,
@@ -76,72 +72,113 @@ var StegoBlock = function(){
 				'z': 0.05979301
 			},
 			
-			init: function() {
+			generateNoise: function(plaintext) {
 				
-				let resultElm = document.getElementById('result');
-				let freqStr = [];
-				
-				for (let x in this.lettersAndFrequency) {
+				let noise = [];
+				let ptDict = {};
+
+				// verify that all chars in plaintext exist in the alphabet.
+				// track how many times each char occur.
+				for (let i = 0; i < plaintext.length; i++) {
+
+					// match with alphabet
+					if (this.alphabetFrequencies[plaintext[i]] === undefined) {
+
+						alert('Message cannot be embedded within StegoBlock and still conform to given letter frequency.\r\nIllegal char: ' + plaintext[i]);
+					}
+
+					// init bucket if no one exists.
+					if (ptDict[plaintext[i]] === undefined)
+						ptDict[plaintext[i]] = 0;
 					
-					let freq = Math.ceil(this.blockLength / 100 * this.lettersAndFrequency[x]);
-					
-					for (let i = 0; i < freq; i++)
-						freqStr.push(x);
+					// increment char count.
+					ptDict[plaintext[i]]++;
 				}
 				
-				this.alphabet = this.shuffle(freqStr).splice(0, this.blockLength);
+				// run through all chars of the alphabet.
+				for (let x in this.alphabetFrequencies) {
+					
+					// calculate the char frequency given the specified block length (4096)
+					let frequency = Math.ceil(this.blockLength / 100 * this.alphabetFrequencies[x]);
+					let ptFreq = ptDict[x] || 0;
+
+					frequency = frequency - ptFreq; // subtract the char frequency in the plaintext, from the calculated.
+					if (frequency < 0) {
+
+						frequency = 0;
+						alert('Message cannot be embedded within StegoBlock and still conform to given letter frequency.\r\nToo many: ' + x);
+					}
+					
+					// as the frequency calculated is now with respect to the plaintext, push the char onto the noise array "frequency" times.
+					for (let i = 0; i < frequency; i++)
+						noise.push(x);
+				}
+
+				// generated noise may not be exactly the desired length, because the rounding up of (blocklength / frequency) will
+				// be slightly off. remedy by removing random chars until noise has correct length.
+				while (noise.length !== this.blockLength - plaintext.length)
+					noise.splice(this.getRandomInRange(Math.random, 0, noise.length - 1), 1);
+				
+				return noise;
+			},
+			
+			hide: function(plaintext, key) {
+				
+				let plaintextArr = typeof plaintext === 'string' ? plaintext.split('') : plaintext; // convert plaintext to string array
+				let prng = new Math.seedrandom(key); // seed the prng with desired key
+				let plaintextLength = this.leftPad(plaintextArr.length.toString(), '000').split(''); // 3 digit length of plaintext
+				let block = []; // the stegoblock
+
+				plaintextArr = plaintextLength.concat(plaintextArr); // prepend plaintext length to plaintext
+				let noise = this.generateNoise(plaintextArr.join('')); // generate noise with correct letter frequencies
+				
+				// iterate until entire block has been filled with message and noise
+				while (block.length < this.blockLength) {
+
+					let insertIndex = this.getRandomInRange(prng, 0, block.length);
+					// pitfall: to avoid overriding any previously added char, new chars are inserted, as
+					// opposed to setting the bucket at a given index to some char. this means later extraction
+					// indexes are relative to their order.
+					block.splice(insertIndex, 0, this.getChar(plaintextArr, noise));
+				}
+				
+				//return block.join('');
+				return window.btoa(block.join('')); // b64 encode, to avoid special characters.
 			},
 			
 			show: function(ciphertext, key) {
 
 				let ciphertextArr = window.atob(ciphertext).split('');
+				//let ciphertextArr = typeof ciphertext === 'string' ? ciphertext.split('') : ciphertext;
 				let prng = new Math.seedrandom(key);
-				let numbers = [];
+				let insertionIndexes = [];
 				let chars = [];
 				
+				// we can only generate the indexes forward, but need to pull chars out reversed.
+				// therefore we will need to iterate twice.
+				// because chars are always inserted, extraction indexes are relative to the block length.
 				for (let i = 0; i < ciphertextArr.length; i++) {
 				
-					let insertIndex = this.getRandomInRange(prng, 0, this.blockLength) % (numbers.length + 1);
-					numbers.unshift(insertIndex);
+					let insertIndex = this.getRandomInRange(prng, 0, insertionIndexes.length);
+					insertionIndexes.unshift(insertIndex);
 				}
 
-				for (let i = 0; i < numbers.length; i++)
-					chars.unshift(ciphertextArr.splice(Math.min(numbers[i], ciphertextArr.length - 1), 1)[0]);
+				// we now have the reverse order of indexes the plaintext was inserted with. extract the correct chars.
+				for (let i = 0; i < insertionIndexes.length; i++)
+					chars.unshift(ciphertextArr.splice(insertionIndexes[i], 1)[0]);
 				
+				// parse the size of the plaintext to an int, so we can slice it off
 				let size = parseInt(chars.slice(0, 3).join(''));
 
 				return chars.slice(3, 3 + size).join('');
 			},
 			
-			hide: function(plaintext, key) {
-				
-				this.init();
-
-				let plaintextArr = plaintext.split('');
-				let prng = new Math.seedrandom(key);
-				let inserts = 0;
-				let block = [];
-				let size = this.leftPad(plaintextArr.length.toString(), '000').split('');
-				
-				while (inserts < this.blockLength) {
-
-					let insertIndex = this.getRandomInRange(prng, 0, this.blockLength) % (block.length + 1);
-					block.splice(insertIndex, 0, this.getChar(size, plaintextArr));
-					inserts++;
-				}
-				
-				return window.btoa(block.join(''));
-			},
-			
-			getChar: function(size, inputArr) {
-
-				if (size.length > 0)
-					return size.shift();
+			getChar: function(inputArr, noise) {
 
 				if (inputArr.length > 0)
 					return inputArr.shift();
 					
-				return this.alphabet[this.alphabetCount++];
+				return noise.shift();
 			},
 			
 			getRandomInRange: function(prng, min, max) {
