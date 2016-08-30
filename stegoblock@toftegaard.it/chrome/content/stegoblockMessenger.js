@@ -37,7 +37,7 @@ var sb = {
 		let that = this;
 
 		// iterate over all selected emails
-		for each (let msgHdr in fixIterator(enumerator, Ci.nsIMsgDBHdr)) {          
+		for (let msgHdr in fixIterator(enumerator, Ci.nsIMsgDBHdr)) {          
 			
 			// extract all headers as MIME messages
 			MsgHdrToMimeMessage(msgHdr, null, function (aMsgHdr, aMimeMsg) {

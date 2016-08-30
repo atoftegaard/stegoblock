@@ -65,7 +65,7 @@ var sb = {
 		getRecipients: function(elementsCollection) {
 
 			let addresses = [];
-			for each (let element in elementsCollection) {
+			for (let element in elementsCollection) {
 
 				if (this.addressNodeRegEx.test(element.id)) {
 

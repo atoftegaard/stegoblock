@@ -13,30 +13,6 @@ var StegoBlock = function(){
 
 	return {
 
-		// shortcut for the extensions preferences
-		prefs: null,
-
-		// stores callbacks for the preference observer
-		observeCallbacks: {},
-
-		// convenience utilities, nice to have
-		utils: {
-
-			// native JS implementation for extending objects. somewhat similar to jQuery.extend()
-			extend: function extend() {
-
-				if (typeof(arguments[0]) === undefiend)
-					arguments[0] = {};
-
-				for (let i = 1; i < arguments.length; i++)
-					for (let key in arguments[i])
-						if (arguments[i].hasOwnProperty(key))
-							arguments[0][key] = arguments[i][key];
-
-				return arguments[0];
-			}
-		},
-
 		steganography: {
 
 			blockLength: 4096,
@@ -115,32 +91,6 @@ var StegoBlock = function(){
 				
 				return noise;
 			},
-
-			checkFrequency: function(string) {
-
-				let dict = {};
-				for (let i = 0; i < string.length; i++) {
-
-					if (dict[string[i]] === undefined)
-						dict[string[i]] = 0;
-					
-					dict[string[i]]++;
-				}
-
-				let frequencies = [];
-				let sortedKeys = Object.keys(dict).sort();
-				for (let i = 0; i < sortedKeys.length; i++) {
-
-					let f = dict[sortedKeys[i]] / string.length * 100;
-					let af = this.alphabetFrequencies[sortedKeys[i]];
-					let isInAlphabet = af !== undefined;
-					let isFrequencyWithinBounds = isInAlphabet && Math.abs(af - f) < 0.1;
-
-					frequencies.push(sortedKeys[i] + ': f: ' + f + ' isInAlphabet: ' + isInAlphabet + ' fbound: ' + (isFrequencyWithinBounds ? isFrequencyWithinBounds : ( 'F ' + dict[sortedKeys[i]] + ' AF ' + string.length / 100 * this.alphabetFrequencies[sortedKeys[i]] )));
-				}
-
-				alert(frequencies.join('\r\n'));
-			},
 			
 			hide: function(plaintext, key) {
 				
@@ -191,8 +141,35 @@ var StegoBlock = function(){
 
 				return chars.slice(3, 3 + size).join('');
 			},
+
+			// checks if a string has correct frequency of each char, according to alphabetFrequencies.
+			checkFrequency: function(string) {
+
+				let dict = {};
+				for (let i = 0; i < string.length; i++) {
+
+					if (dict[string[i]] === undefined)
+						dict[string[i]] = 0;
+					
+					dict[string[i]]++;
+				}
+
+				let frequencies = [];
+				let sortedKeys = Object.keys(dict).sort();
+				for (let i = 0; i < sortedKeys.length; i++) {
+
+					let f = dict[sortedKeys[i]] / string.length * 100;
+					let af = this.alphabetFrequencies[sortedKeys[i]];
+					let isInAlphabet = af !== undefined;
+					let isFrequencyWithinBounds = isInAlphabet && Math.abs(af - f) < 0.1;
+
+					frequencies.push(sortedKeys[i] + ': f: ' + f + ' isInAlphabet: ' + isInAlphabet + ' fbound: ' + (isFrequencyWithinBounds ? isFrequencyWithinBounds : ( 'F ' + dict[sortedKeys[i]] + ' AF ' + string.length / 100 * this.alphabetFrequencies[sortedKeys[i]] )));
+				}
+
+				alert(frequencies.join('\r\n'));
+			},
 			
-			// returns the next char of a plaintext array, or noise, if the first is empty.
+			// returns the next char of a plaintext array or noise, if the first is empty.
 			getChar: function(plaintext, noise) {
 
 				if (plaintext.length > 0)
@@ -216,6 +193,30 @@ var StegoBlock = function(){
 					return pad;
 
 				return (pad + text).substring(text.length, text.length + pad.length);
+			}
+		},
+
+		// shortcut for the extensions preferences
+		prefs: null,
+
+		// stores callbacks for the preference observer
+		observeCallbacks: {},
+
+		// convenience utilities, nice to have
+		utils: {
+
+			// native JS implementation for extending objects. somewhat similar to jQuery.extend()
+			extend: function extend() {
+
+				if (typeof(arguments[0]) === undefiend)
+					arguments[0] = {};
+
+				for (let i = 1; i < arguments.length; i++)
+					for (let key in arguments[i])
+						if (arguments[i].hasOwnProperty(key))
+							arguments[0][key] = arguments[i][key];
+
+				return arguments[0];
 			}
 		},
 
