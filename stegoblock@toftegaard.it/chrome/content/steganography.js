@@ -161,7 +161,8 @@ var Stego = function(){
 				if (!isFrequencyWithinBounds)
 					ret.outsideFrequencyBounds.push(sortedKeys[i]);
 			}
-alert(JSON.stringify(ret));
+			
+			alert(JSON.stringify(ret)); // alert this for testing
 			return ret;
 		},
 		
