@@ -208,16 +208,15 @@ var sb = {
 
 		let prefs = sbCommon.getCharPref('addressesAndKeys');
 		let plaintext = document.getElementById('stegoblock-textbox').value;
-
-		// fill up remaining message space with bogus
-		//plaintext = sb.padRemaining(plaintext);
+		let date = new Date().toString();
 		
 		// hide!
-		let ciphertext = sbCommon.steganography.hide(plaintext, sb.ui.key || sb.randomString(128));
+		let ciphertext = sbCommon.steganography.hide(plaintext, date + sb.ui.key || sb.randomString(128));
 
 		// fold headers, as lines cannot exceed 78 chars
 		ciphertext = sb.fold(ciphertext);
-		gMsgCompose.compFields.setHeader('X-Stegoblock', ciphertext);
+		gMsgCompose.compFields.setHeader('X-StegoBlock', ciphertext);
+		gMsgCompose.compFields.setHeader('X-SBDate', date);
 	},
 
 	// right pads a text with random generated text

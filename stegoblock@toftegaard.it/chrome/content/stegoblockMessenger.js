@@ -86,7 +86,8 @@ var sb = {
 				key = prefs[i].key;
 
 		// extract header
-		let ciphertext = aMimeMsg.get('X-Stegoblock').toString();
+		let ciphertext = aMimeMsg.get('X-StegoBlock').toString();
+		let date = aMimeMsg.get('X-SBDate').toString();
 
 		ciphertext = ciphertext.replace(new RegExp('\\s+|\r|\n', 'g'), '');
 
@@ -110,7 +111,7 @@ var sb = {
 		// show the StegoBlock
 		var plaintext;
 		try{
-			plaintext = sbCommon.steganography.show(ciphertext, key);
+			plaintext = sbCommon.steganography.show(ciphertext, date + key);
 		} catch (e){
 			contentBox.collapsed = false;
 			cont.childNodes[0].nodeValue = e;

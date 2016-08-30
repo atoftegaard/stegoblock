@@ -82,10 +82,7 @@ var StegoBlock = function(){
 				for (let i = 0; i < plaintext.length; i++) {
 
 					// match with alphabet
-					if (this.alphabetFrequencies[plaintext[i]] === undefined) {
-
-						alert('Message cannot be embedded within StegoBlock and still conform to given letter frequency.\r\nIllegal char: ' + plaintext[i]);
-					}
+					//if (this.alphabetFrequencies[plaintext[i]] === undefined) // given char is not in alphabet. notify about this later.
 
 					// init bucket if no one exists.
 					if (ptDict[plaintext[i]] === undefined)
@@ -103,11 +100,8 @@ var StegoBlock = function(){
 					let ptFreq = ptDict[x] || 0;
 
 					frequency = frequency - ptFreq; // subtract the char frequency in the plaintext, from the calculated.
-					if (frequency < 0) {
-
-						frequency = 0;
-						alert('Message cannot be embedded within StegoBlock and still conform to given letter frequency.\r\nToo many: ' + x);
-					}
+					if (frequency < 0)
+						frequency = 0; // there are too many of the given char, to maintain correct frequency. notify about this later.
 					
 					// as the frequency calculated is now with respect to the plaintext, push the char onto the noise array "frequency" times.
 					for (let i = 0; i < frequency; i++)
@@ -120,6 +114,32 @@ var StegoBlock = function(){
 					noise.splice(this.getRandomInRange(Math.random, 0, noise.length - 1), 1);
 				
 				return noise;
+			},
+
+			checkFrequency: function(string) {
+
+				let dict = {};
+				for (let i = 0; i < string.length; i++) {
+
+					if (dict[string[i]] === undefined)
+						dict[string[i]] = 0;
+					
+					dict[string[i]]++;
+				}
+
+				let frequencies = [];
+				let sortedKeys = Object.keys(dict).sort();
+				for (let i = 0; i < sortedKeys.length; i++) {
+
+					let f = dict[sortedKeys[i]] / string.length * 100;
+					let af = this.alphabetFrequencies[sortedKeys[i]];
+					let isInAlphabet = af !== undefined;
+					let isFrequencyWithinBounds = isInAlphabet && Math.abs(af - f) < 0.1;
+
+					frequencies.push(sortedKeys[i] + ': f: ' + f + ' isInAlphabet: ' + isInAlphabet + ' fbound: ' + (isFrequencyWithinBounds ? isFrequencyWithinBounds : ( 'F ' + dict[sortedKeys[i]] + ' AF ' + string.length / 100 * this.alphabetFrequencies[sortedKeys[i]] )));
+				}
+
+				alert(frequencies.join('\r\n'));
 			},
 			
 			hide: function(plaintext, key) {
@@ -137,19 +157,18 @@ var StegoBlock = function(){
 
 					let insertIndex = this.getRandomInRange(prng, 0, block.length);
 					// pitfall: to avoid overriding any previously added char, new chars are inserted, as
-					// opposed to setting the bucket at a given index to some char. this means later extraction
-					// indexes are relative to their order.
+					// opposed to setting the value at a given index to some char. this means later extraction
+					// indexes are relative to their insertion order.
 					block.splice(insertIndex, 0, this.getChar(plaintextArr, noise));
 				}
 				
-				//return block.join('');
-				return window.btoa(block.join('')); // b64 encode, to avoid special characters.
+				this.checkFrequency(block);
+				return window.btoa(block.join('')); // b64 encode for now, to avoid multiple concurrent whitespaces (will be stripped).
 			},
 			
 			show: function(ciphertext, key) {
 
 				let ciphertextArr = window.atob(ciphertext).split('');
-				//let ciphertextArr = typeof ciphertext === 'string' ? ciphertext.split('') : ciphertext;
 				let prng = new Math.seedrandom(key);
 				let insertionIndexes = [];
 				let chars = [];
@@ -173,14 +192,16 @@ var StegoBlock = function(){
 				return chars.slice(3, 3 + size).join('');
 			},
 			
-			getChar: function(inputArr, noise) {
+			// returns the next char of a plaintext array, or noise, if the first is empty.
+			getChar: function(plaintext, noise) {
 
-				if (inputArr.length > 0)
-					return inputArr.shift();
+				if (plaintext.length > 0)
+					return plaintext.shift();
 					
 				return noise.shift();
 			},
 			
+			// returns a random int in the specified range (including), using the provided function.
 			getRandomInRange: function(prng, min, max) {
 				
 				min = Math.ceil(min);
@@ -188,25 +209,13 @@ var StegoBlock = function(){
 				return Math.floor(prng() * (max - min + 1)) + min;
 			},
 			
+			// left pads some string with some other string
 			leftPad: function (text, pad) {
 
 				if (typeof text === 'undefined') 
 					return pad;
 
 				return (pad + text).substring(text.length, text.length + pad.length);
-			},
-				
-			shuffle: function (a) {
-
-				let n = a.length;
-				for (let i = n - 1; i > 0; i--) {
-
-					let j = Math.floor(Math.random() * (i + 1));
-					let tmp = a[i];
-					a[i] = a[j];
-					a[j] = tmp;
-				}
-				return a;
 			}
 		},
 
