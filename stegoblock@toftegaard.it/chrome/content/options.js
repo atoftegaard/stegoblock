@@ -1,4 +1,4 @@
-const sbCommon = window.StegoBlock();
+const sbCommon = window.SBCommon();
 var sb = {
 
 	// the selected StegoKeys
@@ -43,11 +43,11 @@ var sb = {
 	onlistselect: function(items) {
 
 		this.selectedPrefIndexes = [];
-		for each (let item in items) {
+		for (let item in items) {
 			
 			try {
 				
-				this.selectedPrefIndexes.push(parseInt(item.getAttribute('value')));
+				this.selectedPrefIndexes.push(parseInt(items[item].getAttribute('value')));
 			} catch(e) {
 
 			}

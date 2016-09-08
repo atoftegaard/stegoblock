@@ -1,7 +1,7 @@
-var StegoBlock = function(){
+var SBCommon = function () {
 
 	// gets the StegoBlock extension preferences.
-	var initPreferences = function(obj) {
+	var initPreferences = function (obj) {
 		
 		if (obj.prefs)
 			return;
@@ -19,34 +19,37 @@ var StegoBlock = function(){
 		// stores callbacks for the preference observer
 		observeCallbacks: {},
 
-		// convenience utilities, nice to have
+		// convenience utilities
 		utils: {
-
+			
 			// native JS implementation for extending objects. somewhat similar to jQuery.extend()
-			extend: function extend() {
+			extend: function extend () {
 
 				if (typeof(arguments[0]) === undefiend)
 					arguments[0] = {};
 
-				for (let i = 1; i < arguments.length; i++)
-					for (let key in arguments[i])
+				for (let i = 1; i < arguments.length; i++) {
+					for (let key in arguments[i]) {
 						if (arguments[i].hasOwnProperty(key))
 							arguments[0][key] = arguments[i][key];
+					}
+				}
 
 				return arguments[0];
 			}
 		},
 
 		// register a callback that gets fired when preferences change
-		observeCharPreferences: function(id, callback) {
+		observeCharPreferences: function (id, callback) {
 
-			if (this.prefs === null){
+			if (this.prefs === null) {
+				
 				let that = this;
 				let observingObject = {
 
-					observe: function(subject, topic, data) {
+					observe: function (subject, topic, data) {
 
-						if (topic != 'nsPref:changed')
+						if (topic !== 'nsPref:changed')
 							return;
 						
 						for (let callbackId in that.observeCallbacks)
@@ -65,7 +68,7 @@ var StegoBlock = function(){
 		},
 
 		// get specific char preference as an object
-		getCharPref: function(key) {
+		getCharPref: function (key) {
 			
 			initPreferences(this);
 
@@ -73,7 +76,7 @@ var StegoBlock = function(){
 		},
 
 		// set specific char preference with an object. object gets stored serialied.
-		setCharPref: function(key, value) {
+		setCharPref: function (key, value) {
 			
 			initPreferences(this);
 
@@ -81,7 +84,7 @@ var StegoBlock = function(){
 		},
 
 		// unregister a previously registered callback for preference change
-		forget: function(id) {
+		forget: function (id) {
 
 			delete this.observeCallbacks[id];
 		}
@@ -89,4 +92,4 @@ var StegoBlock = function(){
 };
 
 // extend the global variable with common functionality, for easy access
-StegoBlock.utils.extend(window.StegoBlock, StegoBlock());
+SBCommon.utils.extend(window.SBCommon, SBCommon());

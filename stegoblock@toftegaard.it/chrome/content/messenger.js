@@ -1,5 +1,5 @@
-const sbCommon = window.StegoBlock();
-const sbStego = window.Stego();
+const sbCommon = window.SBCommon();
+const sbStego = window.SBStego();
 
 var sb = {
 
@@ -10,30 +10,35 @@ var sb = {
 	sender: null,
 
 	// gets an element by id, from the map or DOM, if not already in the map
-	elementMap: function(id) {
+	elementMap: function (id) {
 		
 		if (this.map[id] === undefined)
 			this.map[id] = document.getElementById(id);
+
 		return this.map[id];
 	},
 	
 	// add listener messagepane loading
-	startup: function(event) {	
+	startup: function (event) {	
 		
 		let messagepane = this.elementMap('messagepane');
 		let that = this;
-		messagepane.addEventListener('load', function(event) { that.onPageLoad(event); }, true);
+		
+		messagepane.addEventListener('load', function (event) {
+
+			that.onPageLoad(event);
+		}, true);
 	},
 
 	// fired when messagepane is ready
-	onPageLoad: function(event) {
+	onPageLoad: function (event) {
 
 		this.handleMessageSelection();
 	},
 
 	// when a message is selected, headers are checked for a StegoBlock.
 	// if one is present, it will be tried shown to the user.
-	handleMessageSelection: function() {
+	handleMessageSelection: function () {
 
 		let enumerator = gFolderDisplay.selectedMessages;
 		let that = this;
@@ -59,7 +64,7 @@ var sb = {
 		}
 	},
 
-	extractStegoHeader: function(sender, aMimeMsg) {
+	extractStegoHeader: function (sender, aMimeMsg) {
 
 		let cont = this.elementMap('stegoblock-content');
 		let contentBox = this.elementMap('stegoblock-content-box');
@@ -83,9 +88,10 @@ var sb = {
 
 		// find matching StegoKey for sender
 		let key;
-		for (let i = 0; i < prefs.length; i++)
+		for (let i = 0; i < prefs.length; i++) {
 			if (prefs[i].addr === sender)
 				key = prefs[i].key;
+		}
 
 		// extract header
 		let ciphertext = aMimeMsg.get('X-StegoBlock').toString();
@@ -115,7 +121,7 @@ var sb = {
 		try {
 
 			plaintext = sbStego.show(ciphertext, date + key);
-		} catch (e){
+		} catch (e) {
 
 			contentBox.collapsed = false;
 			cont.childNodes[0].nodeValue = e;
@@ -162,4 +168,7 @@ var sb = {
 	}
 };
 
-window.addEventListener('load', function (event) { sb.startup(event); }, false);
+window.addEventListener('load', function (event) {
+
+	sb.startup(event);
+}, false);

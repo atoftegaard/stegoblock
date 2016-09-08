@@ -1,5 +1,5 @@
-const sbCommon = window.StegoBlock();
-const sbStego = window.Stego();
+const sbCommon = window.SBCommon();
+const sbStego = window.SBStego();
 
 var sb = {
 
@@ -24,7 +24,7 @@ var sb = {
 		recipient: null,
 
 		// gets an element by id, from the map or DOM, if not already in the map
-		elementMap: function(id) {
+		elementMap: function (id) {
 			
 			if (this.map[id] === undefined)
 				this.map[id] = document.getElementById(id);
@@ -33,7 +33,7 @@ var sb = {
 		},
 
 		// fired when compose window is ready
-		NotifyComposeFieldsReady: function() {		
+		NotifyComposeFieldsReady: function () {		
 
 			let label = this.elementMap('stegoblock-message-length');
 			document.getElementById('stegoblock-textbox').value = '';
@@ -45,10 +45,10 @@ var sb = {
 		},
 
 		// observes the recipients of an email by polling.
-		observeRecipientsByPolling: function() {
+		observeRecipientsByPolling: function () {
 
 			let that = this;
-			setInterval(function() {
+			setInterval(function () {
 
 				let els = document.getElementsByTagName('*'); // get fresh collection each iteration
 				let addresses = that.getRecipients(els);
@@ -64,7 +64,7 @@ var sb = {
 		},
 
 		// extracts recipients (email addresses) from a collection of DOM nodes
-		getRecipients: function(elementsCollection) {
+		getRecipients: function (elementsCollection) {
 
 			let addresses = [];
 			for (let element in elementsCollection) {
@@ -81,19 +81,20 @@ var sb = {
 
 		// validates of there is a key for a single recipient.
 		// maintains UI accordingly, by disabling or enabling textarea.
-		validateRecipientAndKey: function(recipient) {
+		validateRecipientAndKey: function (recipient) {
 
 			let prefs = sbCommon.getCharPref('addressesAndKeys');
 
 			// handle "name <email>"" format
 			if (recipient.indexOf('<') > 0)
-				recipient = this.addressRegEx.exec(recipient)[1]
+				recipient = this.addressRegEx.exec(recipient)[1];
 
 			// check if key is known for recipient
 			let foundKey = false;
-			for (let i = 0; i < prefs.length; i++)
-				if (prefs[i].addr && (prefs[i].addr == recipient))
+			for (let i = 0; i < prefs.length; i++) {
+				if (prefs[i].addr && (prefs[i].addr === recipient))
 					foundKey = prefs[i].key;
+			}
 
 			if (foundKey)
 				this.enable(foundKey);
@@ -108,8 +109,8 @@ var sb = {
 			let box = this.elementMap('stegoblock-disabled-box');
 			let textbox = this.elementMap('stegoblock-textbox');
 			let addbox = this.elementMap('stegoblock-add-key-box');
-
 			let reasonText;
+
 			switch (reason) {
 
 				case 'toomany': {
@@ -165,7 +166,7 @@ var sb = {
 
 		// fired on keydown of the StegoBlock textarea. ensures message length does
 		// not exceed maxMessageLength.
-		validateLength: function(event) {
+		validateLength: function (event) {
 
 			let textboxValue = sb.ui.elementMap('stegoblock-textbox').value;
 			let remaining = sb.ui.maxMessageLength - textboxValue.length;
@@ -176,10 +177,11 @@ var sb = {
 				event.preventDefault();
 				return false;
 			}
+			return true;
 		},
 
 		// maintains a counter for remaining characters in the StegoBlock textarea
-		setRemainingCharCount: function(event) {
+		setRemainingCharCount: function (event) {
 
 			let label = this.elementMap('stegoblock-message-length');
 			let textbox = this.elementMap('stegoblock-textbox');
@@ -196,10 +198,9 @@ var sb = {
 
 			let textbox = this.elementMap('stegoblock-add-key');
 			let key = textbox.value;
-
 			let prefs = sbCommon.getCharPref('addressesAndKeys');
-			prefs.push({ addr: this.recipient, key: key });
 
+			prefs.push({ addr: this.recipient, key: key });
 			sbCommon.setCharPref('addressesAndKeys', prefs);
 			textbox.value = '';
 		}
@@ -222,7 +223,7 @@ var sb = {
 	},
 
 	// right pads a text with random generated text
-	padRemaining: function(text) {
+	padRemaining: function (text) {
 
 		text = text.substring(0, this.ui.maxMessageLength);
 		text += '//';
@@ -244,11 +245,12 @@ var sb = {
 	},
 
 	// generates random string of given length. only alpha numeric chars
-	randomString: function(length) {
+	randomString: function (length) {
+
 		let text = '';
 		let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 		
-		for(let i = 0; i < length; i++)
+		for (let i = 0; i < length; i++)
 			text += possible.charAt(Math.floor(Math.random() * possible.length));
 		
 		return text;
@@ -273,4 +275,7 @@ var sb = {
 };
 
 window.addEventListener('compose-send-message', sb.injectStegoBlockInMessageHeader, true);
-window.addEventListener('compose-window-init', function(){ gMsgCompose.RegisterStateListener(sb.ui); }, true);
+window.addEventListener('compose-window-init', function () {
+
+	gMsgCompose.RegisterStateListener(sb.ui);
+}, true);

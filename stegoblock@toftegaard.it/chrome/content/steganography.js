@@ -1,4 +1,4 @@
-var Stego = function(){
+var SBStego = function () {
 
 	return {
 
@@ -35,7 +35,7 @@ var Stego = function(){
 			'z': 0.05979301
 		},
 		
-		generateNoise: function(plaintext) {
+		generateNoise: function (plaintext) {
 			
 			let noise = [];
 			let ptDict = {};
@@ -79,7 +79,7 @@ var Stego = function(){
 			return noise;
 		},
 		
-		hide: function(plaintext, key) {
+		hide: function (plaintext, key) {
 
 			let plaintextArr = typeof plaintext === 'string' ? plaintext.split('') : plaintext; // convert plaintext to string array
 			let prng = new Math.seedrandom(key); // seed the prng with desired key
@@ -103,7 +103,7 @@ var Stego = function(){
 			return window.btoa(block.join('')); // b64 encode for now, to avoid multiple concurrent whitespaces (will be stripped).
 		},
 		
-		show: function(ciphertext, key) {
+		show: function (ciphertext, key) {
 
 			let ciphertextArr = window.atob(ciphertext).split('');
 			let prng = new Math.seedrandom(key);
@@ -130,7 +130,7 @@ var Stego = function(){
 		},
 
 		// checks if a string has correct frequency of each char, according to alphabetFrequencies.
-		checkFrequency: function(string) {
+		checkFrequency: function (string) {
 
 			let dict = {};
 			let ret = {
@@ -167,7 +167,7 @@ var Stego = function(){
 		},
 		
 		// returns the next char of a plaintext array or noise, if the first is empty.
-		getChar: function(plaintext, noise) {
+		getChar: function (plaintext, noise) {
 
 			if (plaintext.length > 0)
 				return plaintext.shift();
@@ -176,7 +176,7 @@ var Stego = function(){
 		},
 		
 		// returns a random int in the specified range (including), using the provided function.
-		getRandomInRange: function(prng, min, max) {
+		getRandomInRange: function (prng, min, max) {
 			
 			min = Math.ceil(min);
 			max = Math.floor(max);
@@ -191,8 +191,8 @@ var Stego = function(){
 
 			return (pad + text).substring(text.length, text.length + pad.length);
 		}
-	}
+	};
 };
 
 // extend the global variable with common functionality, for easy access
-window.StegoBlock.utils.extend(window.Stego, Stego());
+window.SBCommon.utils.extend(window.SBStego, SBStego());

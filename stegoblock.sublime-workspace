@@ -4,6 +4,90 @@
 		"selected_items":
 		[
 			[
+				"Ste",
+				"Steganography"
+			],
+			[
+				"va",
+				"validateLength"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"max",
+				"maxMessageLength"
+			],
+			[
+				"elemen",
+				"elementMap"
+			],
+			[
+				"se",
+				"selectedPrefIndexes"
+			],
+			[
+				"get",
+				"getElementById"
+			],
+			[
+				"valida",
+				"validateRecipientAndKey"
+			],
+			[
+				"obser",
+				"observeRecipients"
+			],
+			[
+				"observe",
+				"observeRecipientsByPolling"
+			],
+			[
+				"compo",
+				"composeSendMessageHandler"
+			],
+			[
+				"Steg",
+				"StegoBlock"
+			],
+			[
+				"address",
+				"addressesAndKeys"
+			],
+			[
+				"ste",
+				"StegoBlock"
+			],
+			[
+				"str",
+				"stringify"
+			],
+			[
+				"ke",
+				"addressesAndKeys"
+			],
+			[
+				"reason",
+				"reasonText"
+			],
+			[
+				"add",
+				"addresses"
+			],
+			[
+				"text",
+				"textbox"
+			],
+			[
+				"fol",
+				"foldedCiphertext"
+			],
+			[
 				"user",
 				"userGroups"
 			],
@@ -48,10 +132,6 @@
 				"popoverContent"
 			],
 			[
-				"obser",
-				"observerRef"
-			],
-			[
 				"glo",
 				"glossaryentries"
 			],
@@ -82,10 +162,6 @@
 			[
 				"st",
 				"storyboardpictures"
-			],
-			[
-				"text",
-				"text-align"
 			],
 			[
 				"subsc",
@@ -316,16 +392,8 @@
 				"prototype"
 			],
 			[
-				"valida",
-				"validation-message"
-			],
-			[
 				"has-",
 				"has-success"
-			],
-			[
-				"add",
-				"addClass"
 			],
 			[
 				"cur",
@@ -522,15 +590,33 @@
 	"expanded_folders":
 	[
 		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/chrome"
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/chrome",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/chrome/skin"
 	],
 	"file_history":
 	[
-		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/install.rdf",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/chrome.manifest",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/chrome/content/markup.xul",
+		"/Users/andreastoftegaard/Dropbox/Dokumenter/DTU CBS/Datasikkerhed/ofmc-2014/examples/classic/PKINIT.AnB",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/chrome/content/stegoblockMessengercompose.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/chrome/content/stegoblockMessenger.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/chrome/content/stegoblockCommon.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/chrome/content/stego.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/chrome/content/stegoblockMessenger.xul",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/chrome/content/stegoblockMessengercompose.xul",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/chrome/content/seedrandom.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/chrome/content/options.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/install.rdf",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/chrome/content/json2.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/chrome/content/options.xul",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/defaults/preferences/defaults.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/chrome/content/stegoblockMessenger.xul",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/chrome.manifest",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock@toftegaard.it/chrome/content/overlay.js",
 		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/chrome/content/overlay.js",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/chrome/content/myhelloworld.xul",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/chrome.manifest",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/install.rdf",
+		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/stegoblock.xpi/chrome/content/markup.xul",
 		"/Users/andreastoftegaard/Ikke Synkroniseret/stegoblock/install.rdf",
 		"/install.rdf",
 		"/Users/andreastoftegaard/Downloads/ofmc-2016/test.AnB",
@@ -637,34 +723,19 @@
 		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/diagrams/diagramsList.js",
 		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/diagrams/views/diagrams-list.html",
 		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/mup/mup.json",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/enter.js",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/projects/views/project-details.html",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/README.md",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/css/fileupload.css",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/css/textAngular.css",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/modal/views/image-modal.html",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/exifOrientation.js",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/testcases/views/testcase-details.html",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/css/base.css",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/usecases/views/usecase-details.html",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/requirements/views/requirement-details.html",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/diagrams/diagram.js",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/testcases/views/testcases-list.html",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/css/sb-admin-2.css",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/inputList/template.html",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/modal/views/glossary-modal.html",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/components/profile/views/profile.html",
-		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/associations/template.html"
+		"/Users/andreastoftegaard/Ikke Synkroniseret/redo/client/directives/enter.js"
 	],
 	"find":
 	{
-		"height": 22.0
+		"height": 37.0
 	},
 	"find_in_files":
 	{
 		"height": 93.0,
 		"where_history":
 		[
+			"<current file>",
+			"",
 			"/Users/andreastoftegaard/Ikke Synkroniseret/redo,-/Users/andreastoftegaard/Ikke Synkroniseret/redo/.meteor",
 			"/Users/andreastoftegaard/Ikke Synkroniseret/redo",
 			"/Users/andreastoftegaard/Ikke Synkroniseret/redo/,-*.meteor",
@@ -712,134 +783,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"C,idp,SP,ID,URI",
-			"|C,idp,SP,ID,URI|",
-			"ID,",
-			"SK1",
-			"C,idp,SP,ID,URI",
+			"shuff",
+			"fold",
+			"\n ",
+			"ciphertext",
+			"var",
+			"fold",
+			"_",
+			"ciphertext",
+			"alert",
+			"0",
+			"\n ",
+			"stega",
+			"();\n",
+			"sbCommon",
+			"cryp",
+			"stega",
+			"stegoBl",
+			"crypt",
+			"cryp",
+			"var",
+			"inputArr",
+			"r1",
+			"inputArr",
+			"%	",
+			"	",
+			"E",
+			"	",
+			"test",
+			"extractStegoBlockMessageHeader",
+			"MsgHdr",
+			"msgHdr",
+			"MsgHdr",
+			"msgHdr",
+			"aMsgHdr",
+			"aMimeMsg",
+			"document.getElementById",
+			"cont",
+			"contentBox",
+			"disabledBox",
+			"disabledLabel",
+			"prefs",
+			"addressRegEx",
+			"this",
+			"if(",
+			"elementm",
+			"this.key",
+			"sb.ui.key",
+			"window",
+			"win",
+			"window",
+			"validateRecipientAndKey",
+			"getRecipients",
+			"key",
+			"Key",
+			"key",
+			"Key",
+			"key",
+			"Key",
+			"key",
+			"run",
+			"window",
+			"proto",
+			"prototy",
+			"Date.prototype.toJSON = function (key) {",
+			"content",
+			"content.collapsed = true;",
+			"disabledBox",
+			"content",
+			"sender",
+			"window.sender",
+			"window.sender = sender;",
+			"content.value",
+			"stegoblock-content",
+			"alert",
+			"al",
+			"var",
+			"n",
+			"pl",
 			" ",
-			"INT_DNS_IP",
-			"USR_IPR",
-			"EXT_SMTP_IP",
-			"glossaryentry",
-			"indexOf(\"/glossaryentry/\")",
-			"	\n	$reactive(this).attach($scope);",
-			"@",
-			"img",
-			"           ",
-			"          ",
-			"         ",
-			"        ",
-			"       ",
-			"      ",
-			"     ",
-			"    ",
-			"row",
-			"base64",
-			"base",
-			"item",
-			"partici",
-			"json",
-			"match.js",
-			"match",
-			"check",
-			"match",
-			"check/match",
-			"number",
-			"check =",
-			"Number",
-			"kadira",
-			"getAllDocuments =",
-			"loadProject",
-			"dbname",
-			"app:password@mongodb.com",
-			".logo",
-			"ctrl.collapse(); c",
-			"getAllDocuments =",
-			"Actors",
-			"self.actor",
-			"subscribeQuery",
-			"dtu.dk",
-			"current",
-			"archive",
-			"buffer",
-			"export",
-			"dropdo",
-			"dropdown",
-			"myString",
-			"myRegexp",
-			"getOptions",
-			"goal",
-			"state",
-			"states",
-			"dateti",
-			"dropdown-menu",
-			".dropdown {",
-			".dropdown",
-			"team",
-			"queries",
-			"teams",
-			"inviteUsers",
-			"teamsInvitedTo",
-			"teamInvitees",
-			"team",
-			"teams",
-			"getTeamUsers",
-			"loadpr",
-			"users",
-			"dataB64",
-			"currentProjectId",
-			"current",
-			"project",
-			"trigger",
-			"No currentProject found",
-			"removeMetaProperties",
-			"hash",
-			"hmac",
-			"id",
-			"stripMetaProperties",
-			"stripInvalidProperties",
-			"deNormalizeCollectionName",
-			"permissions",
-			"user",
-			"createListItem",
-			"reader",
-			"entries",
-			"export",
-			"angular",
-			"user helper",
-			"overriding",
-			"overriding 'user helper'",
-			"Papertrail",
-			"loginCAS",
-			"wins",
-			"                           ",
-			"                          ",
-			"                         ",
-			"                        ",
-			"                       ",
-			"                      ",
-			"LISTENING",
-			"arguments",
-			"formatArgs(arguments)",
-			"Winston",
-			"apply(Winston, ",
-			"logger",
-			"logger.",
-			"Winston",
-			"currentproj",
-			"exports",
-			"glossaryentries",
-			"extdocs",
-			"ext",
-			"diagrams",
-			"diagram",
-			"Diagram",
-			"Diagrams",
-			"diagrams",
-			"Diagrams",
-			"diagrams",
-			"diagram"
+			"ciphertext",
+			"alert",
+			"random",
+			"str",
+			"padRemaining",
+			"ciphertext",
+			"\"",
+			"randomString",
+			"pad",
+			"padRemaining",
+			"var",
+			"asd",
+			"this",
+			"which",
+			"max",
+			"textboxValuetextboxValuetextboxValuetextboxValuetextboxValue",
+			"maxMessageLength",
+			"textbox",
+			"keyCode",
+			"remaining",
+			"textbox",
+			"messageLength",
+			"remaining",
+			"maxMessageLength",
+			"setRemainingCharCount",
+			"hbox",
+			"\"",
+			"content.collapsed",
+			"stegoblock-add-key",
+			"ui",
+			"this",
+			"selectedPrefIndexes",
+			"this.selectedPrefIndexes",
+			"selectedPrefIndexes",
+			"label",
+			"var",
+			"theList",
+			"addressesAndKeys",
+			"addressRegEx",
+			"recipient",
+			"found",
+			"enable",
+			"disable",
+			"map",
+			"document.getElementById",
+			"var",
+			"prefs",
+			"addrRE",
+			"addressRegEx"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -847,6 +918,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"'",
+			"15d7b40e-4bc9-461e-8181-e5af76b59193",
 			"",
 			"type: 'textAngular'",
 			"acceptInvitationFromToken",
@@ -940,7 +1013,7 @@
 	"project": "",
 	"replace":
 	{
-		"height": 40.0
+		"height": 66.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1318,7 +1391,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 237.0,
+	"side_bar_width": 301.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

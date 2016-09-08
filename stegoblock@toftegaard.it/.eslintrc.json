@@ -1,0 +1,30 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "rules": {
+        "semi": "error",
+        "curly": ["error", "multi-or-nest", "consistent"],
+        "quotes": ["error", "single"],
+        "no-debugger": "error",
+        "no-dupe-args": "error",
+        "no-extra-semi": "error",
+        "no-irregular-whitespace": "error",
+        "consistent-return": "error",
+        "dot-location": ["error", "property"],
+        "eqeqeq": ["error", "always"],
+        "no-global-assign": "error",
+        "block-spacing": "error",
+        "array-bracket-spacing": ["error", "never"],
+        "brace-style": "error",
+        "no-mixed-spaces-and-tabs": "error",
+        "no-multiple-empty-lines": "error",
+        "space-before-blocks": "error",
+        "space-before-function-paren": "error",
+        "object-curly-newline": ["error", {"multiline": true}]
+    }
+}
