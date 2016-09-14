@@ -109,7 +109,7 @@ var SBStego = function () {
 			// block will most likely contain consecutive spaces. those will be squashed by
 			// https://dxr.mozilla.org/mozilla-central/rev/82d0a583a9a39bf0b0000bccbf6d5c9ec2596bcc/addon-sdk/source/test/addons/e10s-content/lib/httpd.js#4639
 			// which is a normalization function that all headers go through. we cannot reverse
-			// this transformation, and must therefore escape spaces.
+			// this transformation, and must therefore escape spaces. 
 			let escaped = block.join('').replace(/_/g, '|_').replace(/ /g, '_');
 			return escaped;
 		},
