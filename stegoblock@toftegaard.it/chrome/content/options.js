@@ -9,7 +9,7 @@ var sb = {
 
 	// initializes a list with all stored StegoKeys.
 	// keys are not stored encrypted, it is considered unnecessary
-	init: function() {
+	init: function () {
 
 		let list = document.getElementById('stegoblock-address-key-list');
 		let purgebutton = document.getElementById('stegoblock-purge');
@@ -40,7 +40,7 @@ var sb = {
 
 	// fired when one or more items are selected in the list.
 	// maintains an array of selected StegoKeys
-	onlistselect: function(items) {
+	onlistselect: function (items) {
 
 		this.selectedPrefIndexes = [];
 		for (let item in items) {
@@ -62,7 +62,7 @@ var sb = {
 
 	// fired when Delete button is clicked. deletes the selected
 	// StegoKeys if user confirms.
-	onDelete: function() {
+	onDelete: function () {
 
 		var text = this.selectedPrefIndexes.length > 1 ? 'Are you sure you want to delete these StegoKeys? This action cannot be undone.' : 'Are you sure you want to delete this StegoKey? This action cannot be undone.';
 		if (this.promptservice.confirm(window, 'Confirm deletion', text)) {
@@ -77,7 +77,7 @@ var sb = {
 	},
 
 	// fired when Purge button is clicked. deletes all stored StegoKeys.
-	onPurge: function() {
+	onPurge: function () {
 
 		if (this.promptservice.confirm(window, 'Confirm purge', 'Are you sure you want to delete all stored StegoKeys? This action cannot be undone.')) {
 			
@@ -87,4 +87,6 @@ var sb = {
 	}
 };
 
-window.addEventListener('load', function() { sb.init(); }, false);
+window.addEventListener('load', function () {
+	sb.init();
+}, false);

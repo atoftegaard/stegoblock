@@ -6,7 +6,7 @@ var sb = {
 	ui: {
 		
 		// maximum StegoBlock message length
-		maxMessageLength: 255,
+		maxMessageLength: sbStego.maxPlaintextLength,
 
 		// regexp for extracting textboxes with email recipient addresses
 		addressNodeRegEx: /addressCol2/,
@@ -211,10 +211,10 @@ var sb = {
 
 		let prefs = sbCommon.getCharPref('addressesAndKeys');
 		let plaintext = document.getElementById('stegoblock-textbox').value;
-		let date = new Date().toString();
-		
+		let date = (new Date()).toString();
+	
 		// hide!
-		let ciphertext = sbStego.hide(plaintext, date + sb.ui.key || sb.randomString(128));
+		let ciphertext = sbStego.encode(plaintext, date, sb.ui.key || sb.randomString(128));
 
 		// fold headers, as lines cannot exceed 78 chars
 		ciphertext = sb.fold(ciphertext);

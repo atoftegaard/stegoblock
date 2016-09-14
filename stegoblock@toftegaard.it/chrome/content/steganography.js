@@ -2,6 +2,7 @@ var SBStego = function () {
 
 	return {
 
+		maxPlaintextLength: 255,
 		blockLength: 4096,
 			
 		alphabetFrequencies: {
@@ -47,7 +48,7 @@ var SBStego = function () {
 				// match with alphabet
 				//if (this.alphabetFrequencies[plaintext[i]] === undefined) // given char is not in alphabet. notify about this later.
 
-				// init bucket if no one exists.
+				// init bucket if none exists.
 				if (ptDict[plaintext[i]] === undefined)
 					ptDict[plaintext[i]] = 0;
 				
@@ -58,16 +59,17 @@ var SBStego = function () {
 			// run through all chars of the alphabet.
 			for (let x in this.alphabetFrequencies) {
 				
-				// calculate the char frequency given the specified block length (4096)
-				let frequency = Math.ceil(this.blockLength / 100 * this.alphabetFrequencies[x]);
+				// calculate the char count given the specified block length (4096) and frequency
+				let charCount = Math.ceil(this.blockLength / 100 * this.alphabetFrequencies[x]);
 				let ptFreq = ptDict[x] || 0;
 
-				frequency = frequency - ptFreq; // subtract the char frequency in the plaintext, from the calculated.
-				if (frequency < 0)
-					frequency = 0; // there are too many of the given char, to maintain correct frequency. notify about this later.
+				charCount = charCount - ptFreq; // subtract the char char count in the plaintext, from the calculated.
+				if (charCount < 0)
+					charCount = 0; // there are too many of the given char, to maintain correct frequency. notify about this later.
 				
-				// as the frequency calculated is now with respect to the plaintext, push the char onto the noise array "frequency" times.
-				for (let i = 0; i < frequency; i++)
+				// as the frequency and char count calculated is now with respect to the plaintext, push the char onto the noise
+				// array "charCount" times.
+				for (let i = 0; i < charCount; i++)
 					noise.push(x);
 			}
 
@@ -79,16 +81,19 @@ var SBStego = function () {
 			return noise;
 		},
 		
-		hide: function (plaintext, key) {
+		encode: function (plaintext, seed, key) {
+
+			if(plaintext.length > this.maxPlaintextLength)
+				throw 'Plain text too long';
 
 			let plaintextArr = typeof plaintext === 'string' ? plaintext.split('') : plaintext; // convert plaintext to string array
-			let prng = new Math.seedrandom(key); // seed the prng with desired key
+			let prng = new Math.seedrandom(seed + key); // seed the prng with desired key
 			let plaintextLength = this.leftPad(plaintextArr.length.toString(), '000').split(''); // 3 digit length of plaintext
 			let block = []; // the stegoblock
 
 			plaintextArr = plaintextLength.concat(plaintextArr); // prepend plaintext length to plaintext
 			let noise = this.generateNoise(plaintextArr.join('')); // generate noise with correct letter frequencies
-			
+	
 			// iterate until entire block has been filled with message and noise
 			while (block.length < this.blockLength) {
 
@@ -98,15 +103,24 @@ var SBStego = function () {
 				// indexes are relative to their insertion order.
 				block.splice(insertIndex, 0, this.getChar(plaintextArr, noise));
 			}
-			
+
 			this.checkFrequency(block);
-			return window.btoa(block.join('')); // b64 encode for now, to avoid multiple concurrent whitespaces (will be stripped).
+
+			// block will most likely contain consecutive spaces. those will be squashed by
+			// https://dxr.mozilla.org/mozilla-central/rev/82d0a583a9a39bf0b0000bccbf6d5c9ec2596bcc/addon-sdk/source/test/addons/e10s-content/lib/httpd.js#4639
+			// which is a normalization function that all headers go through. we cannot reverse
+			// this transformation, and must therefore escape spaces.
+			let escaped = block.join('').replace(/_/g, '|_').replace(/ /g, '_');
+			return escaped;
 		},
 		
-		show: function (ciphertext, key) {
+		decode: function (ciphertext, seed, key) {
+			
+			// unesacpe any escaped spaces, introduced and mentioned in this.encode
+			ciphertext = ciphertext.replace(/_/g, ' ').replace(/\|_/g, '_');
 
-			let ciphertextArr = window.atob(ciphertext).split('');
-			let prng = new Math.seedrandom(key);
+			let ciphertextArr = ciphertext.split('');
+			let prng = new Math.seedrandom(seed + key);
 			let insertionIndexes = [];
 			let chars = [];
 			
@@ -132,6 +146,7 @@ var SBStego = function () {
 		// checks if a string has correct frequency of each char, according to alphabetFrequencies.
 		checkFrequency: function (string) {
 
+			let allowedOffset = 0.1;
 			let dict = {};
 			let ret = {
 
@@ -154,7 +169,7 @@ var SBStego = function () {
 				let f = dict[sortedKeys[i]] / string.length * 100;
 				let af = this.alphabetFrequencies[sortedKeys[i]];
 				let isInAlphabet = af !== undefined;
-				let isFrequencyWithinBounds = isInAlphabet && Math.abs(af - f) < 0.1;
+				let isFrequencyWithinBounds = isInAlphabet && Math.abs(af - f) < allowedOffset;
 
 				if (!isInAlphabet)
 					ret.notInAlphabet.push(sortedKeys[i]);
@@ -162,7 +177,7 @@ var SBStego = function () {
 					ret.outsideFrequencyBounds.push(sortedKeys[i]);
 			}
 			
-			alert(JSON.stringify(ret)); // alert this for testing
+			alert(JSON.stringify(ret)); // alert this for testing, halt of not empty
 			return ret;
 		},
 		

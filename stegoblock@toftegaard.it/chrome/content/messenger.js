@@ -92,7 +92,7 @@ var sb = {
 			if (prefs[i].addr === sender)
 				key = prefs[i].key;
 		}
-
+		
 		// extract header
 		let ciphertext = aMimeMsg.get('X-StegoBlock').toString();
 		let date = aMimeMsg.get('X-SBDate').toString();
@@ -120,7 +120,7 @@ var sb = {
 		var plaintext;
 		try {
 
-			plaintext = sbStego.show(ciphertext, date + key);
+			plaintext = sbStego.decode(ciphertext, date, key);
 		} catch (e) {
 
 			contentBox.collapsed = false;
