@@ -3,15 +3,15 @@ const sbStego = window.SBStego();
 
 var sb = {
 
-	// stores references to elements, for fast access
-	map: {},
-
 	// storage for the sender of a selected email
 	sender: null,
 
 	// gets an element by id, from the map or DOM, if not already in the map
 	elementMap: function (id) {
 		
+		if (this.map === undefined)
+			this.map = {};
+
 		if (this.map[id] === undefined)
 			this.map[id] = document.getElementById(id);
 
@@ -22,18 +22,12 @@ var sb = {
 	startup: function (event) {	
 		
 		let messagepane = this.elementMap('messagepane');
-		let that = this;
+		let _this = this;
 		
 		messagepane.addEventListener('load', function (event) {
 
-			that.onPageLoad(event);
+			_this.handleMessageSelection();
 		}, true);
-	},
-
-	// fired when messagepane is ready
-	onPageLoad: function (event) {
-
-		this.handleMessageSelection();
 	},
 
 	// when a message is selected, headers are checked for a StegoBlock.
@@ -41,7 +35,7 @@ var sb = {
 	handleMessageSelection: function () {
 
 		let enumerator = gFolderDisplay.selectedMessages;
-		let that = this;
+		let _this = this;
 
 		// iterate over all selected emails
 		for (let msgHdr in fixIterator(enumerator, Ci.nsIMsgDBHdr)) {          
@@ -51,11 +45,11 @@ var sb = {
 
 				try {
 
-					// trial and error. first from then to - ensures that StegoBlocks in
-					// sent mails can be read. not very elegant, but apparently there is
+					// trial and error. first "from" then "to" - ensures that StegoBlocks in
+					// sent mails can also be read. not very elegant, but apparently there is
 					// no way to distinguish if a mail is in a "sent" folder.
-					if (!that.extractStegoHeader(aMimeMsg.headers.from.toString().trim(), aMimeMsg))
-						that.extractStegoHeader(aMimeMsg.headers.to.toString().trim(), aMimeMsg);
+					if (!_this.extractStegoHeader(aMimeMsg.headers.from.toString().trim(), aMimeMsg))
+						_this.extractStegoHeader(aMimeMsg.headers.to.toString().trim(), aMimeMsg);
 
 				} catch (err) {
 

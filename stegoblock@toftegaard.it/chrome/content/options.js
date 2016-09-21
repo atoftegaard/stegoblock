@@ -1,4 +1,5 @@
 const sbCommon = window.SBCommon();
+
 var sb = {
 
 	// the selected StegoKeys
@@ -24,6 +25,7 @@ var sb = {
 
 			let row = document.createElement('listitem');
 			let cell = document.createElement('listcell');
+
 			row.setAttribute('value', i);
 			cell.setAttribute('label', prefs[i].addr);
 			row.appendChild(cell);
@@ -43,6 +45,8 @@ var sb = {
 	onlistselect: function (items) {
 
 		this.selectedPrefIndexes = [];
+		let button = document.getElementById('stegoblock-delete-key');
+
 		for (let item in items) {
 			
 			try {
@@ -53,7 +57,6 @@ var sb = {
 			}
 		}
 
-		let button = document.getElementById('stegoblock-delete-key');
 		if (this.selectedPrefIndexes.length > 0)
 			button.disabled = false;
 		else
@@ -64,10 +67,12 @@ var sb = {
 	// StegoKeys if user confirms.
 	onDelete: function () {
 
-		var text = this.selectedPrefIndexes.length > 1 ? 'Are you sure you want to delete these StegoKeys? This action cannot be undone.' : 'Are you sure you want to delete this StegoKey? This action cannot be undone.';
+		let text = this.selectedPrefIndexes.length > 1 ? 'Are you sure you want to delete these StegoKeys? This action cannot be undone.' : 'Are you sure you want to delete this StegoKey? This action cannot be undone.';
+		
 		if (this.promptservice.confirm(window, 'Confirm deletion', text)) {
 			
 			let prefs = sbCommon.getCharPref('addressesAndKeys');
+			
 			for (let i = 0; i < this.selectedPrefIndexes.length; i++)
 				prefs.splice(this.selectedPrefIndexes[i], 1);
 

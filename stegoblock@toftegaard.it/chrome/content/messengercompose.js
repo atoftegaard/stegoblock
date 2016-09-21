@@ -5,6 +5,9 @@ var sb = {
 
 	ui: {
 		
+		// service for prompting users
+		promptservice: Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService),
+
 		// maximum StegoBlock message length
 		maxMessageLength: sbStego.maxPlaintextLength,
 
@@ -14,9 +17,6 @@ var sb = {
 		// regexp for extracting email from "name <email>" format
 		addressRegEx: /<(.*)>/,
 
-		// stores references to elements, for fast access
-		map: {},
-
 		// storage for key of recipient
 		key: null,
 
@@ -25,6 +25,9 @@ var sb = {
 
 		// gets an element by id, from the map or DOM, if not already in the map
 		elementMap: function (id) {
+					
+			if (this.map === undefined)
+				this.map = {};
 			
 			if (this.map[id] === undefined)
 				this.map[id] = document.getElementById(id);
@@ -47,18 +50,18 @@ var sb = {
 		// observes the recipients of an email by polling.
 		observeRecipientsByPolling: function () {
 
-			let that = this;
+			let _this = this;
 			setInterval(function () {
 
 				let els = document.getElementsByTagName('*'); // get fresh collection each iteration
-				let addresses = that.getRecipients(els);
+				let addresses = _this.getRecipients(els);
 
 				if (addresses.length > 1)
-					that.disable('toomany');
+					_this.disable('toomany');
 				else if (addresses[0] !== undefined)
-					that.validateRecipientAndKey(addresses[0]);
+					_this.validateRecipientAndKey(addresses[0]);
 				else
-					that.enable(null); // in case of no recipient, just show the textarea
+					_this.enable(null); // in case of no recipient, just show the textarea
 
 			}, 500);
 		},
@@ -209,17 +212,32 @@ var sb = {
 	// fired after user clicks Send. injects the StegoBlock message in the email header
 	injectStegoBlockInMessageHeader: function (event) {
 
-		let prefs = sbCommon.getCharPref('addressesAndKeys');
-		let plaintext = document.getElementById('stegoblock-textbox').value;
-		let date = (new Date()).toString();
-	
-		// hide!
-		let ciphertext = sbStego.encode(plaintext, date, sb.ui.key || sb.randomString(128));
+		try {
 
-		// fold headers, as lines cannot exceed 78 chars
-		ciphertext = sb.fold(ciphertext);
-		gMsgCompose.compFields.setHeader('X-StegoBlock', ciphertext);
-		gMsgCompose.compFields.setHeader('X-SBDate', date);
+			let plaintext = document.getElementById('stegoblock-textbox').value;
+			let date = (new Date()).toString();
+		
+			// hide!
+			let block = sbStego.encode(plaintext, date, sb.ui.key || sb.randomString(128));
+
+			// fold headers, as lines cannot exceed 78 chars
+			block = sb.fold(block);
+			gMsgCompose.compFields.setHeader('X-StegoBlock', block);
+			gMsgCompose.compFields.setHeader('X-SBDate', date);
+
+			return true;
+
+		} catch (e) {
+
+			// it is crucial to cancel all emails without a StegoBlock, to preserve plausible deniability.
+			this.promptservice.alert(window, 'Fatal error', 'An unrecoverable error occured during StegoBlock generation. ' +
+				'To preserve "Plausible deniability", it is crucial that all outgoing emails contain a StegoBlock. Your email ' +
+				'has been cancelled.');
+			
+			// prevent from bubbling, cancelling sending.
+			event.preventDefault();
+			return false;
+		}
 	},
 
 	// right pads a text with random generated text
