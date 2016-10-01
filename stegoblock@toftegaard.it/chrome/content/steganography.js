@@ -4,6 +4,7 @@ var SBStego = function () {
 
 		maxPlaintextLength: 255,
 		blockLength: 4096,
+		allowedOffset: 0.1,
 			
 		alphabetFrequencies: {
 			
@@ -144,7 +145,6 @@ var SBStego = function () {
 		// checks if a string has correct frequency of each char, according to alphabetFrequencies.
 		checkFrequency: function (string) {
 
-			let allowedOffset = 0.1;
 			let dict = {};
 			let ret = {
 
@@ -167,7 +167,7 @@ var SBStego = function () {
 				let f = dict[sortedKeys[i]] / string.length * 100;
 				let af = this.alphabetFrequencies[sortedKeys[i]];
 				let isInAlphabet = af !== undefined;
-				let isFrequencyWithinBounds = isInAlphabet && Math.abs(af - f) < allowedOffset;
+				let isFrequencyWithinBounds = isInAlphabet && Math.abs(af - f) < this.allowedOffset;
 
 				if (!isInAlphabet)
 					ret.notInAlphabet.push(sortedKeys[i]);
@@ -184,7 +184,7 @@ var SBStego = function () {
 
 			if (plaintext.length > 0)
 				return plaintext.shift();
-				
+
 			return noise.shift();
 		},
 		
@@ -193,6 +193,7 @@ var SBStego = function () {
 			
 			min = Math.ceil(min);
 			max = Math.floor(max);
+			
 			return Math.floor(prng() * (max - min + 1)) + min;
 		},
 		
