@@ -65,12 +65,14 @@ var sb = {
 		let disabledBox = this.elementMap('stegoblock-disabled-box');
 		let disabledLabel = this.elementMap('stegoblock-disabled-label');
 		let prefs = sbCommon.getCharPref('addressesAndKeys');
+		let button = this.elementMap('stegoblock-add-button');
 		let addressRegEx = /<(.*)>/;
 
 		contentBox.collapsed = true;
 		disabledBox.collapsed = true;
 		cont.collapsed = false;
 		contentBox.collapsed = true;
+		button.collapsed = false;
 		cont.childNodes[0].nodeValue = ''; // hacky way to set value of a description node
 
 		// handle "name <email>" format
@@ -83,6 +85,7 @@ var sb = {
 		// find matching StegoKey for sender
 		let key;
 		for (let i = 0; i < prefs.length; i++) {
+
 			if (prefs[i].addr === sender)
 				key = prefs[i].key;
 		}
@@ -91,7 +94,9 @@ var sb = {
 		let ciphertext = aMimeMsg.get('X-StegoBlock').toString();
 		let date = aMimeMsg.get('X-SBDate').toString();
 
-		ciphertext = ciphertext.replace(new RegExp('\\s+|\r|\n', 'g'), '');
+		// remove folding spaces
+		ciphertext = ciphertext.replace(new RegExp(' ', 'g'), '');
+		ciphertext = decodeURIComponent(ciphertext);
 
 		// do not show any StegoBlock UI if email does not contain a StegoBlock
 		if (ciphertext.length === 0) {
@@ -111,7 +116,7 @@ var sb = {
 		}
 
 		// show the StegoBlock
-		var plaintext;
+		let plaintext;
 		try {
 
 			plaintext = sbStego.decode(ciphertext, date, key);
@@ -121,8 +126,14 @@ var sb = {
 			cont.childNodes[0].nodeValue = e;
 		}
 
-		// strip away any random right padding (if message is less than maxMessageLength)
-		//plaintext = plaintext.substring(0, plaintext.lastIndexOf('//'));
+		// there is a key and block, but of length 0. means either no message or different key.
+		if (plaintext.length === 0) {
+
+			contentBox.collapsed = false;
+			disabledBox.collapsed = false;
+			cont.collapsed = true;
+			disabledLabel.value = 'No message in StegoBlock, update StegoKey for ' + sender + '?';
+		}
 
 		contentBox.collapsed = false;
 		cont.childNodes[0].nodeValue = plaintext;
@@ -151,9 +162,21 @@ var sb = {
 
 		let textbox = this.elementMap('stegoblock-add-key');
 		let key = textbox.value;
-
 		let prefs = sbCommon.getCharPref('addressesAndKeys');
-		prefs.push({ addr: this.sender, key: key });
+		let found = false;
+
+		// find matching StegoKey for sender
+		for (let i = 0; i < prefs.length; i++) {
+
+			if (prefs[i].addr === this.sender) {
+
+				prefs[i].key = key;
+				found = true;
+			}
+		}
+
+		if (!found)
+			prefs.push({ addr: this.sender, key: key });
 
 		sbCommon.setCharPref('addressesAndKeys', prefs);
 		this.handleMessageSelection();

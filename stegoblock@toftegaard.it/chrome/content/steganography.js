@@ -2,82 +2,145 @@ var SBStego = function () {
 
 	return {
 
-		maxPlaintextLength: 255,
-		blockLength: 4096,
-		allowedOffset: 0.1,
-			
+		maxPlaintextLength: 200,
+		blockLength: 4400,
+
 		alphabetFrequencies: {
 			
-			' ': 18.31685753,
-			'e': 10.21787708,
-			't': 7.50999398,
-			'a': 6.55307059,
-			'o': 6.20055405,
-			'n': 5.70308374,
-			'i': 5.73425524,
-			's': 5.32626738,
-			'r': 4.97199926,
-			'h': 4.86220925,
-			'l': 3.35616550,
-			'd': 3.35227377,
-			'u': 2.29520040,
-			'c': 2.26508836,
-			'm': 2.01727037,
-			'f': 1.97180888,
-			'w': 1.68961396,
-			'g': 1.63586607,
-			'p': 1.50311560,
-			'y': 1.46995463,
-			'b': 1.27076566,
-			'v': 0.78804815,
-			'k': 0.56916712,
-			'x': 0.14980832,
-			'j': 0.11440544,
-			'q': 0.08809302,
-			'z': 0.05979301
+			' ': 16.06718960,
+			'e': 8.38191046,
+			't': 5.97449455,
+			'o': 5.49426190,
+			'a': 5.49365722,
+			'n': 5.17089898,
+			'i': 4.87451515,
+			'r': 4.55353236,
+			's': 4.31688330,
+			'l': 2.93379732,
+			'h': 2.70875299,
+			'd': 2.40453403,
+			'c': 2.26601057,
+			'u': 1.97602092,
+			'm': 1.76507724,
+			'p': 1.50065145,
+			'f': 1.34908232,
+			'y': 1.34689517,
+			'g': 1.32540969,
+			'.': 1.14563926,
+			'w': 1.13791993,
+			'b': 0.92085225,
+			',': 0.83979924,
+			'0': 0.83385535,
+			'v': 0.74238124,
+			'-': 0.70177754,
+			'E': 0.68850029,
+			'=': 0.64724045,
+			'k': 0.58342728,
+			'T': 0.56770557,
+			'2': 0.51566439,
+			'C': 0.51247374,
+			'/': 0.47558818,
+			'S': 0.47345250,
+			'1': 0.43507454,
+			'A': 0.43493302,
+			'I': 0.42157858,
+			'_': 0.36992336,
+			'M': 0.36024846,
+			'N': 0.33621560,
+			'P': 0.32306700,
+			'O': 0.32287402,
+			'D': 0.31618393,
+			'R': 0.30635465,
+			'>': 0.27271121,
+			':': 0.26795096,
+			'3': 0.26488896,
+			'\'': 0.22384783,
+			'B': 0.21430158,
+			'H': 0.21057057,
+			'L': 0.20983724,
+			'F': 0.19583951,
+			'\t': 0.19488746,
+			'@': 0.19023013,
+			'5': 0.18643479,
+			'9': 0.18505817,
+			'W': 0.18344998,
+			'x': 0.18092833,
+			'?': 0.18050377,
+			'G': 0.17274584,
+			'4': 0.16012472,
+			'7': 0.15750015,
+			'U': 0.14626852,
+			'8': 0.14083925,
+			'6': 0.13537139,
+			'J': 0.13009651,
+			')': 0.12981347,
+			'(': 0.12127074,
+			'<': 0.10048000,
+			'q': 0.09605425,
+			'j': 0.09571974,
+			'K': 0.08672672,
+			'z': 0.08664953,
+			'V': 0.08546590,
+			'Y': 0.07774656,
+			';': 0.06578159,
+			'*': 0.06518978,
+			'&': 0.05738038,
+			'$': 0.05343066,
+			'"': 0.05126925,
+			'!': 0.04618735,
+			'X': 0.04392301,
+			'+': 0.03535455,
+			'Z': 0.02887031,
+			'Q': 0.02826563,
+			'|': 0.02237320,
+			'~': 0.02202583,
+			']': 0.01722698,
+			'[': 0.01717552,
+			'%': 0.01478253,
+			'\\': 0.01220941,
+			'#': 0.01201643,
+			'`': 0.00562225,
+			'{': 0.00015439,
+			'}': 0.00014152
 		},
 		
-		generateNoise: function (plaintext) {
+		generateNoise: function (sizeArr, plaintextArr) {
 			
+			let input = sizeArr.concat(plaintextArr);
 			let noise = [];
 			let ptDict = {};
 
 			// verify that all chars in plaintext exist in the alphabet.
 			// track how many times each char occur.
-			for (let i = 0; i < plaintext.length; i++) {
-
-				// match with alphabet
-				//if (this.alphabetFrequencies[plaintext[i]] === undefined) // given char is not in alphabet. notify about this later.
+			for (let i = 0; i < input.length; i++) {
 
 				// init bucket if none exists.
-				if (ptDict[plaintext[i]] === undefined)
-					ptDict[plaintext[i]] = 0;
+				if (ptDict[input[i]] === undefined)
+					ptDict[input[i]] = 0;
 				
 				// increment char count.
-				ptDict[plaintext[i]]++;
+				ptDict[input[i]]++;
 			}
 			
 			// run through all chars of the alphabet.
 			for (let x in this.alphabetFrequencies) {
 				
-				// calculate the char count given the specified block length (4096) and frequency
-				let charCount = Math.ceil(this.blockLength / 100 * this.alphabetFrequencies[x]);
+				// calculate the char count given the specified block length (4400) and frequency
+				let charCount = Math.round(this.blockLength / 100 * this.alphabetFrequencies[x]);
 				let ptFreq = ptDict[x] || 0;
 
-				charCount = charCount - ptFreq; // subtract the char char count in the plaintext, from the calculated.
+				charCount = charCount - ptFreq; // subtract the char count in the plaintext, from the calculated.
 				if (charCount < 0)
-					charCount = 0; // there are too many of the given char, to maintain correct frequency. notify about this later.
+					charCount = 0; // there is already too many of the given char, to maintain correct frequency. notify about this later.
 				
 				// as the frequency and char count calculated is now with respect to the plaintext, push the char onto the noise
 				// array "charCount" times.
 				for (let i = 0; i < charCount; i++)
 					noise.push(x);
 			}
-
-			// generated noise may not be exactly the desired length, because the rounding up of (blocklength / frequency) will
-			// be slightly off. remedy by removing random chars until noise has correct length.
-			while (noise.length !== this.blockLength - plaintext.length)
-				noise.splice(this.getRandomInRange(Math.random, 0, noise.length - 1), 1);
+			
+			// shuffle noise, as we would otherwise reveal if some key is fake and ruin plausible deniability.
+			this.shuffle(new Math.seedrandom(), noise);
 			
 			return noise;
 		},
@@ -85,61 +148,83 @@ var SBStego = function () {
 		encode: function (plaintext, seed, key) {
 
 			if(plaintext.length > this.maxPlaintextLength)
-				throw 'Plain text too long';
-
+				throw 'Plaintext too long';
+			
 			let plaintextArr = typeof plaintext === 'string' ? plaintext.split('') : plaintext; // convert plaintext to string array
-			let prng = new Math.seedrandom(seed + key); // seed the prng with desired key
-			let plaintextLength = this.leftPad(plaintextArr.length.toString(), '000').split(''); // 3 digit length of plaintext
-			let block = []; // the stegoblock
+			let length = plaintextArr.length.toString();
+			
+			if (plaintextArr.length === 0) {
 
-			plaintextArr = plaintextLength.concat(plaintextArr); // prepend plaintext length to plaintext
-			let noise = this.generateNoise(plaintextArr.join('')); // generate noise with correct letter frequencies
-	
-			// iterate until entire block has been filled with message and noise
-			while (block.length < this.blockLength) {
-
-				let insertIndex = this.getRandomInRange(prng, 0, block.length);
-				// pitfall: to avoid overriding any previously added char, new chars are inserted, as
-				// opposed to setting the value at a given index to some char. this means later extraction
-				// indexes are relative to their insertion order.
-				block.splice(insertIndex, 0, this.getChar(plaintextArr, noise));
+				while (this.isPositiveInteger(length))
+					length = this.getRandomString(3);
 			}
 
-			this.checkFrequency(block);
+			let prng = new Math.seedrandom(seed + key); // seed the prng with desired key
+			let sizeArr = this.leftPad(length, '000').split('');
+			let noise = this.generateNoise(sizeArr, plaintextArr); // generate noise with correct letter frequencies
+			let block = sizeArr.concat(plaintextArr).concat(noise);
 
-			// block will contain adjacent spaces. those will be squashed by
-			// https://dxr.mozilla.org/mozilla-central/rev/82d0a583a9a39bf0b0000bccbf6d5c9ec2596bcc/addon-sdk/source/test/addons/e10s-content/lib/httpd.js#4639
-			// which is a normalization function that all headers go through. we cannot reverse
-			// this transformation, and must therefore transform spaces. 
-			let escaped = block.join('').replace(/ /g, ' ');
-			return escaped;
+			this.shuffle(prng, block);
+
+			return block;
 		},
 		
-		decode: function (ciphertext, seed, key) {
-			
-			// unesacpe any escaped spaces, introduced and mentioned in this.encode
-			let ciphertextArr = ciphertext.split('');
+		decode: function (block, seed, key) {
+
 			let prng = new Math.seedrandom(seed + key);
-			let insertionIndexes = [];
-			let chars = [];
-			
-			// we can only generate the indexes forward, but need to pull chars out reversed.
-			// therefore we will need to iterate twice.
-			// because chars are always inserted, extraction indexes are relative to the block length.
-			for (let i = 0; i < ciphertextArr.length; i++) {
-			
-				let insertIndex = this.getRandomInRange(prng, 0, insertionIndexes.length);
-				insertionIndexes.unshift(insertIndex);
-			}
+			block = block.split('');
 
-			// we now have the reverse order of indexes the plaintext was inserted with. extract the correct chars.
-			for (let i = 0; i < insertionIndexes.length; i++)
-				chars.unshift(ciphertextArr.splice(insertionIndexes[i], 1)[0]);
-				
+			this.unshuffle(prng, block);
+
+			let sizeStr = block.slice(0, 3).join('');
+
+			// 3 first chars must be digits to be valid 
+			if (!this.isPositiveInteger(sizeStr))
+				return '';
+			
 			// parse the size of the plaintext to an int, so we can slice it off
-			let size = parseInt(chars.slice(0, 3).join(''));
+			let size = parseInt(sizeStr);
 
-			return chars.slice(3, 3 + size).join('');
+			// must be valid length
+			if (size < 0 || size > this.maxPlaintextLength)
+				return '';
+
+			return block.slice(3, 3 + size).join('');
+		},
+
+		// knuth-fisher-yates shuffle
+		shuffle: function (prng, arr) {
+
+			for (let i = arr.length - 1; i > 0; i--) {
+
+				let j = this.getRandomInRange(prng, 0, i);
+				let temp = arr[i];
+
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+			
+			return arr;
+		},
+
+		// reverse knuth-fisher-yates shuffle. only works if prng is in same state as when shuffled.
+		unshuffle: function (prng, arr) {
+
+			// generate all swapping positions needed, so we may start with the last one.
+			let indexes = [];
+			for (let i = arr.length - 1; i > 0; i--)
+				indexes.unshift(this.getRandomInRange(prng, 0, i));
+		
+			// reverse knuth-fisher-yates shuffle
+			for (let i = 1; i < arr.length; i++) {
+
+				let j = indexes.shift();
+				let temp = arr[i];
+
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+			return arr;
 		},
 
 		// checks if a string has correct frequency of each char, according to alphabetFrequencies.
@@ -162,20 +247,19 @@ var SBStego = function () {
 
 			let frequencies = [];
 			let sortedKeys = Object.keys(dict).sort();
-			for (let i = 0; i < sortedKeys.length; i++) {
+			
+			for (let k in sortedKeys) {
 
-				let f = dict[sortedKeys[i]] / string.length * 100;
-				let af = this.alphabetFrequencies[sortedKeys[i]];
-				let isInAlphabet = af !== undefined;
-				let isFrequencyWithinBounds = isInAlphabet && Math.abs(af - f) < this.allowedOffset;
+				let charCount = Math.round(this.blockLength / 100 * this.alphabetFrequencies[sortedKeys[k]]);
+				let isInAlphabet = this.alphabetFrequencies[sortedKeys[k]] !== undefined;
+				let isFrequencyWithinBounds = isInAlphabet && charCount === dict[sortedKeys[k]];
 
 				if (!isInAlphabet)
-					ret.notInAlphabet.push(sortedKeys[i]);
+					ret.notInAlphabet.push(sortedKeys[k]);
 				if (!isFrequencyWithinBounds)
-					ret.outsideFrequencyBounds.push(sortedKeys[i]);
+					ret.outsideFrequencyBounds.push(sortedKeys[k]);
 			}
 			
-			alert(JSON.stringify(ret)); // alert this for testing, halt of not empty
 			return ret;
 		},
 		
@@ -186,6 +270,11 @@ var SBStego = function () {
 				return plaintext.shift();
 
 			return noise.shift();
+		},
+
+		// checks if some input is a positive integer. from: http://stackoverflow.com/a/10835227
+		isPositiveInteger: function (input) {
+			return 0 === input % (!isNaN(parseFloat(input)) && 0 <= ~~input);
 		},
 		
 		// returns a random int in the specified range (including), using the provided function.
@@ -204,6 +293,21 @@ var SBStego = function () {
 				return pad;
 
 			return (pad + text).substring(text.length, text.length + pad.length);
+		},
+
+		// generates random string of given length. only alpha numeric chars.
+		getRandomString: function (length, prng) {
+
+			let text = '';
+			let possible = Object.keys(this.alphabetFrequencies).join('');
+
+			if (!prng)
+				prng = new Math.seedrandom();
+			
+			for (let i = 0; i < length; i++)
+				text += possible.charAt(Math.floor(prng() * possible.length));
+			
+			return text;
 		}
 	};
 };

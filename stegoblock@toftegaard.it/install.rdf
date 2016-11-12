@@ -7,11 +7,11 @@
 		<em:name>Stego Block</em:name>
 		<em:description>Encrypted secondary messages in emails.</em:description>
 
-<!--The Stego Block extension allows for embedding small secondary and encrypted messages in email headers, known as a Stego Block. If no message is added, a randomly generated on will be inserted. Adversaries cannot destinguish between Stego Blocks containing real messages and ones containing random tekst. This provides the sender with plausible deniability of communicating in secret with any recipient.
+<!--The StegoBlock extension allows for embedding small secondary and encrypted messages in email headers, known as a StegoBlock. If no message is added, a randomly generated on will be inserted. Adversaries cannot destinguish between Stego Blocks containing real messages and ones containing random tekst. This provides the sender with plausible deniability of communicating in secret with any recipient.
 
 Stego Blocks are encrypted with 256 bit AES.-->
 
-		<em:version>1.0.1</em:version>
+		<em:version>1.0.2</em:version>
 		<em:creator>Andreas Toftegaard</em:creator>
 		<em:optionsURL>chrome://stegoblock/content/options.xul</em:optionsURL>
 		<em:iconURL>chrome://stegoblock/content/icon.png</em:iconURL>

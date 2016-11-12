@@ -13,17 +13,19 @@
 				<label id="stegoblock-message-length" flex="1" style="color: grey; font-style: italic; text-align: right"/>
 			</vbox>
 			
-			<textbox multiline="true" id="stegoblock-textbox" flex="1" placeholder="Embed a secondary message"
-				name="stegoblock.message.body" minheight="50" onkeyup="sb.ui.setRemainingCharCount()"/>
+			<vbox flex="1">
+				<textbox multiline="true" id="stegoblock-textbox" flex="1" placeholder="Embed a secondary message"
+					name="stegoblock.message.body" minheight="50" onkeyup="sb.ui.setRemainingCharCount()"/>
 
-			<vbox id="stegoblock-disabled-box" collapsed="true" flex="1">
-				<hbox>
-					<label id="stegoblock-disabled-label" flex="1" style="color: grey; font-style: italic"/>
-				</hbox>
-				<hbox id="stegoblock-add-key-box">
-					<textbox id="stegoblock-add-key" placeholder="Shared secret key of at least 8 characters. Do not agree on this over email" flex="1" onkeyup="sb.ui.validateKey()"/>
-					<button id="stegoblock-add-button" oncommand="sb.ui.addKey()" style="text-align: center">Add StegoKey</button>
-				</hbox>
+				<vbox id="stegoblock-disabled-box" collapsed="true" flex="1">
+					<hbox>
+						<label id="stegoblock-disabled-label" flex="1" style="color: grey; font-style: italic"/>
+					</hbox>
+					<hbox id="stegoblock-add-key-box">
+						<textbox id="stegoblock-add-key" placeholder="Shared secret key of at least 8 characters. Do not agree on this over email" flex="1" onkeyup="sb.ui.validateKey()"/>
+						<button id="stegoblock-add-button" oncommand="sb.ui.addKey()" style="text-align: center">Add StegoKey</button>
+					</hbox>
+				</vbox>
 			</vbox>
 		</hbox>
 	</vbox>
